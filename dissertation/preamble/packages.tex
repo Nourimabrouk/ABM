@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% LaTeX Packages for PhD Dissertation
+% LaTeX Packages for PhD Dissertation - MINIMAL OVERLEAF VERSION
 % Agent-Based Models for Statistical Sociology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -8,6 +8,13 @@
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
 \usepackage{lmodern}
+\usepackage{newunicodechar}
+
+% Unicode character definitions for Greek letters and math symbols
+\newunicodechar{κ}{\ensuremath{\kappa}}
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
 
 % Page layout and geometry
 \usepackage[margin=2.5cm,top=3cm,bottom=3cm]{geometry}
@@ -17,54 +24,52 @@
 % Mathematical notation and symbols
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{mathtools}
-\usepackage{bm} % Bold math symbols
-\usepackage{dsfont} % Double-struck fonts
+\usepackage{bm}
+\usepackage{dsfont}
 
-% Graphics and figures
+% Graphics and figures - SIMPLIFIED
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{subfig}
+
+% Basic TikZ for simple diagrams
 \usepackage{tikz}
 \usepackage{pgfplots}
-\pgfplotsset{compat=1.18}
-\usetikzlibrary{positioning,arrows,shapes,decorations.pathreplacing}
+\pgfplotsset{compat=1.16}
 
-% Tables and data presentation
+% Tables and data presentation - ESSENTIAL ONLY
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{tabularx}
 \usepackage{multirow}
 \usepackage{array}
 
-% Bibliography and citations
+% Bibliography and citations - STANDARD CONFIGURATION
 \usepackage[style=apa,backend=biber,natbib=true]{biblatex}
-\DeclareLanguageMapping{english}{english-apa}
 
-% Cross-referencing and hyperlinks
+% Cross-referencing - BASIC ONLY
 \usepackage{hyperref}
-\usepackage{cleveref}
 \usepackage{url}
-\usepackage[all]{hypcap}
 
 % Code listings and algorithms
 \usepackage{listings}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 
-% Colors for highlighting
+% Colors - MINIMAL
 \usepackage{xcolor}
-\definecolor{codeblue}{RGB}{0,102,204}
-\definecolor{codegray}{RGB}{128,128,128}
-\definecolor{codegreen}{RGB}{0,128,0}
 
 % Enhanced list environments
 \usepackage{enumitem}
 
-% Advanced text formatting
-\usepackage{microtype}
-\usepackage{csquotes}
+% Algorithm packages
+\usepackage{algorithm}
+\usepackage{algorithmic}
 
-% Header and footer customization
+% Text formatting - ESSENTIAL ONLY
+\usepackage{microtype}
+
+% Header and footer
 \usepackage{fancyhdr}
 
 % Appendix handling
@@ -74,19 +79,15 @@
 \usepackage{makeidx}
 \makeindex
 
-% ToC customization
-\usepackage{tocloft}
+% ToC customization - DISABLED DUE TO CONFLICT WITH SUBFIG
+%\usepackage{tocloft}
 
-% Special symbols for statistical notation
+% Mathematical symbols
 \usepackage{textcomp}
 \usepackage{gensymb}
 
-% Enhanced math environments
+% Math environments
 \usepackage{amsthm}
 
-% Professional quality tables
-\usepackage{threeparttable}
-
-% Caption customization
+% Caption handling
 \usepackage{caption}
-\usepackage{subcaption}

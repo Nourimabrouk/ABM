@@ -4,6 +4,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Page style and headers
+\setlength{\headheight}{14.5pt}
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[LE,RO]{\thepage}
@@ -23,8 +24,8 @@
     urlcolor=blue,
     citecolor=black,
     pdftitle={Agent-Based Models for Statistical Sociology},
-    pdfauthor={Jan-Willem Simons},
-    pdfsubject={PhD Dissertation - Computational Social Science},
+    pdfauthor={Agent Gerben},
+    pdfsubject={Academic Publication - Computational Social Science},
     pdfkeywords={Agent-Based Models, Social Networks, RSiena, Statistical Sociology}
 }
 
@@ -46,27 +47,12 @@
 \setlist[itemize]{leftmargin=*}
 \setlist[enumerate]{leftmargin=*}
 
-% Code listing style
+% Code listing style - SIMPLIFIED
 \lstset{
     basicstyle=\ttfamily\footnotesize,
-    keywordstyle=\color{codeblue}\bfseries,
-    commentstyle=\color{codegreen}\itshape,
-    stringstyle=\color{red},
-    numberstyle=\tiny\color{codegray},
-    numbers=left,
-    stepnumber=1,
-    numbersep=5pt,
-    backgroundcolor=\color{gray!5},
     frame=single,
-    frameround=tttt,
-    framesep=3pt,
-    framexleftmargin=3pt,
-    tabsize=2,
-    showstringspaces=false,
     breaklines=true,
-    breakatwhitespace=false,
-    aboveskip=10pt,
-    belowskip=10pt
+    showstringspaces=false
 }
 
 % Mathematical theorem environments
@@ -81,9 +67,13 @@
 \newtheorem{remark}{Remark}[chapter]
 \newtheorem{example}{Example}[chapter]
 
-% Algorithm formatting
-\renewcommand{\algorithmicrequire}{\textbf{Input:}}
-\renewcommand{\algorithmicensure}{\textbf{Output:}}
+% Algorithm formatting (with package check)
+\makeatletter
+\@ifpackageloaded{algorithmic}{%
+  \renewcommand{\algorithmicrequire}{\textbf{Input:}}
+  \renewcommand{\algorithmicensure}{\textbf{Output:}}
+}{}
+\makeatother
 
 % Bibliography formatting
 \setlength{\bibitemsep}{0.5\baselineskip}

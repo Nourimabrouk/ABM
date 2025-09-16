@@ -6,6 +6,13 @@ This chapter presents results from extensive simulation experiments testing diff
 
 The results demonstrate the practical significance of the large effect sizes identified in the empirical analysis, with tolerance interventions showing substantial impacts on interethnic cooperation when properly targeted using network-based strategies. The convergence of statistical significance (p = 0.0074) with practical significance (d = 0.837) provides robust evidence for the effectiveness of theoretically-grounded tolerance interventions in educational settings.
 
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=1.0\textwidth]{figures/results_comprehensive_suite.png}
+\caption{Comprehensive Results Visualization: Complete Findings from Tolerance Intervention Simulations. This multi-panel figure showcases all major findings from the intervention simulations including effect sizes with confidence intervals, cost-effectiveness analysis across different targeting strategies, policy implementation readiness assessment, intervention effectiveness landscape, network structure impact analysis, sustainability projections, ROI analysis, and implementation framework. The visualization demonstrates the substantial positive effects of tolerance interventions on interethnic cooperation when properly implemented using network-based targeting strategies.}
+\label{fig:results_comprehensive_suite}
+\end{figure}
+
 \section{Simulation Overview}
 
 \subsection{Experimental Design}
@@ -16,7 +23,7 @@ The simulation experiments implement a full factorial design with 4 × 4 × 4 ×
 \item \textbf{Intervention Intensity}: 0.5, 1.0, 1.5, 2.0 SD increases in tolerance
 \item \textbf{Target Proportion}: 10\%, 20\%, 30\%, 40\% of students
 \item \textbf{Targeting Strategy}: Random, Central, Peripheral, Clustered
-\item \textbf{Network Basis**: Friendship, Cooperation, Combined networks
+\item \textbf{Network Basis}: Friendship, Cooperation, Combined networks
 \end{itemize}
 
 Each condition was replicated 100 times using different random seeds, generating over 19,200 simulation runs. Simulations used the baseline classroom characteristics from Wave 1 data, allowing assessment of intervention effects starting from realistic initial conditions.
@@ -25,18 +32,18 @@ Each condition was replicated 100 times using different random seeds, generating
 
 Primary outcomes include:
 \begin{itemize}
-\item \textbf{Interethnic Cooperation Density**: Proportion of possible interethnic cooperation ties
-\item \textbf{Mean Tolerance Level**: Average tolerance across all students
-\item \textbf{Tolerance Distribution**: Proportion of students with high tolerance (>1 SD above baseline)
-\item \textbf{Network Integration**: E-I index measuring ethnic integration in cooperation networks
+\item \textbf{Interethnic Cooperation Density}: Proportion of possible interethnic cooperation ties
+\item \textbf{Mean Tolerance Level}: Average tolerance across all students
+\item \textbf{Tolerance Distribution}: Proportion of students with high tolerance (>1 SD above baseline)
+\item \textbf{Network Integration}: E-I index measuring ethnic integration in cooperation networks
 \end{itemize}
 
 Secondary outcomes include:
 \begin{itemize}
-\item \textbf{Cascade Size**: Number of students showing tolerance increases >0.2 SD
-\item \textbf{Diffusion Speed**: Time to reach 50\% of maximum effect
-\item \textbf{Effect Persistence**: Proportion of intervention effects remaining at 12 months
-\item \textbf{Unintended Consequences**: Friendship network changes and potential backlash effects
+\item \textbf{Cascade Size}: Number of students showing tolerance increases >0.2 SD
+\item \textbf{Diffusion Speed}: Time to reach 50\% of maximum effect
+\item \textbf{Effect Persistence}: Proportion of intervention effects remaining at 12 months
+\item \textbf{Unintended Consequences}: Friendship network changes and potential backlash effects
 \end{itemize}
 
 \section{Main Effects}
@@ -47,16 +54,16 @@ Figure \ref{fig:intensity_effects} shows how intervention intensity affects prim
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=1.0\textwidth]{../outputs/visualizations/tolerance_intervention_comprehensive}
+\includegraphics[width=1.0\textwidth]{figures/tolerance_intervention_comprehensive.pdf}
 \caption{Comprehensive Tolerance Intervention Analysis: Evidence-Based Strategy Optimization. This 6-panel figure presents the complete intervention effectiveness analysis including: (A) Intervention intensity effects showing optimal dosage at 1.0-1.5 SD increases, (B) Targeting strategy comparison with clustered targeting achieving +18.9\% cooperation increases, (C) Temporal dynamics of tolerance diffusion and cooperation emergence, (D) Context moderation effects across classroom diversity levels, (E) Cost-effectiveness analysis demonstrating optimal resource allocation, and (F) Long-term persistence analysis showing 76\% effect maintenance at 12 months. Results validate the practical significance of the large effect sizes (Cohen's d = 0.837) identified in the empirical analysis, providing evidence-based recommendations for educational intervention design. Figure generated at 300+ DPI resolution for publication quality.}
 \label{fig:tolerance_intervention_comprehensive}
 \end{figure}
 
-\textbf{Interethnic Cooperation**: Small interventions (+0.5 SD) produce minimal cooperation increases (+2.3\% relative to baseline). Medium interventions (+1.0 SD) produce substantial increases (+12.7\%), while large interventions (+1.5 SD) yield the best cost-benefit ratio (+18.4\%). Very large interventions (+2.0 SD) show diminishing returns (+21.1\%) and increased risk of backlash effects.
+\textbf{Interethnic Cooperation}: Small interventions (+0.5 SD) produce minimal cooperation increases (+2.3\% relative to baseline). Medium interventions (+1.0 SD) produce substantial increases (+12.7\%), while large interventions (+1.5 SD) yield the best cost-benefit ratio (+18.4\%). Very large interventions (+2.0 SD) show diminishing returns (+21.1\%) and increased risk of backlash effects.
 
-\textbf{Tolerance Diffusion**: The attraction-repulsion mechanism creates non-linear dose-response relationships. Medium-intensity interventions produce the most widespread tolerance diffusion because they place recipients in the "attraction zone" for more peers. Higher intensities risk triggering repulsion mechanisms that limit diffusion.
+\textbf{Tolerance Diffusion}: The attraction-repulsion mechanism creates non-linear dose-response relationships. Medium-intensity interventions produce the most widespread tolerance diffusion because they place recipients in the "attraction zone" for more peers. Higher intensities risk triggering repulsion mechanisms that limit diffusion.
 
-\textbf{Optimal Dosage**: Across all conditions, 1.0-1.5 SD increases emerge as optimal, balancing effectiveness with efficiency and minimizing unintended consequences.
+\textbf{Optimal Dosage}: Across all conditions, 1.0-1.5 SD increases emerge as optimal, balancing effectiveness with efficiency and minimizing unintended consequences.
 
 \subsection{Target Proportion Effects}
 
@@ -64,16 +71,16 @@ Figure \ref{fig:proportion_effects} examines how the proportion of students targ
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.8\textwidth]{figures/proportion_effects_plot}
+\includegraphics[width=0.8\textwidth]{figures/proportion_effects_plot.png}
 \caption{Target Proportion Effects on Intervention Effectiveness}
 \label{fig:proportion_effects}
 \end{figure}
 
-\textbf{Threshold Effects**: Interventions targeting fewer than 15\% of students typically fail to create sustainable change. The critical threshold appears around 20\%, where cascading effects begin to emerge.
+\textbf{Threshold Effects}: Interventions targeting fewer than 15\% of students typically fail to create sustainable change. The critical threshold appears around 20\%, where cascading effects begin to emerge.
 
-\textbf{Diminishing Returns**: Beyond 30\%, additional targets yield progressively smaller benefits. The optimal range appears to be 20-30\% for most conditions.
+\textbf{Diminishing Returns}: Beyond 30\%, additional targets yield progressively smaller benefits. The optimal range appears to be 20-30\% for most conditions.
 
-\textbf{Cost-Effectiveness**: Targeting 20\% of students maximizes cost-effectiveness, producing 75\% of the benefits of targeting 40\% at half the cost.
+\textbf{Cost-Effectiveness}: Targeting 20\% of students maximizes cost-effectiveness, producing 75\% of the benefits of targeting 40\% at half the cost.
 
 \subsection{Targeting Strategy Effects}
 
@@ -96,11 +103,11 @@ Clustered & +18.9 & +0.38 & 69 & 78 \\
 \end{tabular}
 \end{table}
 
-\textbf{Clustered Targeting Superior**: Clustered targeting produces the largest cooperation increases (+18.9\%) and highest persistence (78\%), validating the complex contagion mechanisms identified in the empirical analysis. This strategy demonstrates both statistical significance and practical significance, with effect sizes exceeding Cohen's d = 0.8 benchmarks for large effects. The combination of network-based targeting with the validated attraction-repulsion influence mechanism (Cohen's d = 0.837, p = 0.0074) creates synergistic effects that maximize intervention impact while maintaining cost-effectiveness.
+\textbf{Clustered Targeting Superior}: Clustered targeting produces the largest cooperation increases (+18.9\%) and highest persistence (78\%), validating the complex contagion mechanisms identified in the empirical analysis. This strategy demonstrates both statistical significance and practical significance, with effect sizes exceeding Cohen's d = 0.8 benchmarks for large effects. The combination of network-based targeting with the validated attraction-repulsion influence mechanism (Cohen's d = 0.837, p = 0.0074) creates synergistic effects that maximize intervention impact while maintaining cost-effectiveness.
 
-\textbf{Central vs. Random**: Central targeting outperforms random targeting (+15.7\% vs. +8.3\%), confirming the importance of network position. However, the advantage is smaller than predicted by simple diffusion models.
+\textbf{Central vs. Random}: Central targeting outperforms random targeting (+15.7\% vs. +8.3\%), confirming the importance of network position. However, the advantage is smaller than predicted by simple diffusion models.
 
-\textbf{Peripheral Targeting Limitations**: Peripheral targeting shows limited effectiveness, likely because peripheral students have fewer connections through which to spread tolerance.
+\textbf{Peripheral Targeting Limitations}: Peripheral targeting shows limited effectiveness, likely because peripheral students have fewer connections through which to spread tolerance.
 
 \section{Interaction Effects}
 
@@ -110,16 +117,16 @@ Figure \ref{fig:intensity_strategy} reveals important interactions between inter
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.8\textwidth]{figures/intensity_strategy_plot}
+\includegraphics[width=0.8\textwidth]{figures/intensity_strategy_plot.png}
 \caption{Intervention Intensity × Targeting Strategy Interactions}
 \label{fig:intensity_strategy}
 \end{figure}
 
-\textbf{Strategy-Dependent Optimal Dosage**: Central targeting works best with moderate intensities (1.0-1.5 SD), while clustered targeting can handle higher intensities (1.5-2.0 SD) without triggering backlash.
+\textbf{Strategy-Dependent Optimal Dosage}: Central targeting works best with moderate intensities (1.0-1.5 SD), while clustered targeting can handle higher intensities (1.5-2.0 SD) without triggering backlash.
 
-\textbf{Repulsion Thresholds**: Central students face more diverse social pressures, making them more susceptible to repulsion effects at high intervention intensities. Clustered students receive social support that buffers against repulsion.
+\textbf{Repulsion Thresholds}: Central students face more diverse social pressures, making them more susceptible to repulsion effects at high intervention intensities. Clustered students receive social support that buffers against repulsion.
 
-\textbf{Diffusion Patterns**: Central targeting produces faster initial diffusion but lower persistence. Clustered targeting shows slower initial spread but greater long-term stability.
+\textbf{Diffusion Patterns}: Central targeting produces faster initial diffusion but lower persistence. Clustered targeting shows slower initial spread but greater long-term stability.
 
 \subsection{Context Moderation Effects}
 
@@ -149,11 +156,11 @@ Intervention stability (\%) & 61 & 72 & 84 \\
 \end{tabular}
 \end{table}
 
-\textbf{Diversity Amplification**: Interventions are most effective in highly diverse classrooms, where tolerance can facilitate cooperation across multiple ethnic boundaries. In homogeneous classrooms, tolerance interventions have limited scope for impact.
+\textbf{Diversity Amplification}: Interventions are most effective in highly diverse classrooms, where tolerance can facilitate cooperation across multiple ethnic boundaries. In homogeneous classrooms, tolerance interventions have limited scope for impact.
 
-\textbf{Baseline Readiness**: Classrooms with higher baseline tolerance show greater intervention responsiveness. This suggests a "rich get richer" dynamic where tolerance interventions may inadvertently increase between-classroom inequality.
+\textbf{Baseline Readiness}: Classrooms with higher baseline tolerance show greater intervention responsiveness. This suggests a "rich get richer" dynamic where tolerance interventions may inadvertently increase between-classroom inequality.
 
-\textbf{Structural Support**: Dense networks and supportive teachers enhance intervention effectiveness and persistence. Interventions in unsupportive contexts show rapid decay.
+\textbf{Structural Support}: Dense networks and supportive teachers enhance intervention effectiveness and persistence. Interventions in unsupportive contexts show rapid decay.
 
 \section{Temporal Dynamics}
 
@@ -163,21 +170,21 @@ Figure \ref{fig:temporal_dynamics} traces tolerance and cooperation changes over
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.8\textwidth]{figures/temporal_dynamics_plot}
+\includegraphics[width=0.8\textwidth]{figures/temporal_dynamics_plot.png}
 \caption{Temporal Dynamics of Intervention Effects}
 \label{fig:temporal_dynamics}
 \end{figure}
 
-\textbf{Multi-Phase Dynamics**: Intervention effects follow a three-phase pattern:
+\textbf{Multi-Phase Dynamics}: Intervention effects follow a three-phase pattern:
 \begin{enumerate}
 \item \textbf{Initial Spread} (0-2 months): Rapid tolerance diffusion among intervention recipients' immediate friends
 \item \textbf{Secondary Diffusion} (2-6 months): Gradual spread to friends-of-friends and emergence of cooperation changes
 \item \textbf{Stabilization} (6-12 months): Network reorganization and establishment of new equilibrium
 \end{enumerate}
 
-\textbf{Cooperation Lag**: Cooperation changes lag tolerance changes by 1-2 months, consistent with the theoretical mechanism where tolerance changes affect relationship formation gradually.
+\textbf{Cooperation Lag}: Cooperation changes lag tolerance changes by 1-2 months, consistent with the theoretical mechanism where tolerance changes affect relationship formation gradually.
 
-\textbf{Persistence Factors**: Long-term persistence depends on:
+\textbf{Persistence Factors}: Long-term persistence depends on:
 \begin{itemize}
 \item Network support for tolerance norms
 \item Positive feedback from successful interethnic cooperation
@@ -188,11 +195,11 @@ Figure \ref{fig:temporal_dynamics} traces tolerance and cooperation changes over
 
 Detailed analysis of tolerance cascades reveals complex dynamics:
 
-\textbf{Cascade Initiation**: Successful cascades typically require 3-4 initial adopters in connected positions. Isolated adopters rarely initiate cascades regardless of their network centrality.
+\textbf{Cascade Initiation}: Successful cascades typically require 3-4 initial adopters in connected positions. Isolated adopters rarely initiate cascades regardless of their network centrality.
 
-\textbf{Cascade Propagation**: Cascades spread most rapidly through dense friendship clusters with moderate baseline tolerance. Very high or very low baseline tolerance impedes cascade propagation.
+\textbf{Cascade Propagation}: Cascades spread most rapidly through dense friendship clusters with moderate baseline tolerance. Very high or very low baseline tolerance impedes cascade propagation.
 
-\textbf{Cascade Termination**: Cascades typically terminate when they encounter network boundaries (ethnic or academic groups) or regions of low tolerance where repulsion effects dominate.
+\textbf{Cascade Termination}: Cascades typically terminate when they encounter network boundaries (ethnic or academic groups) or regions of low tolerance where repulsion effects dominate.
 
 \section{Optimal Intervention Strategies}
 
@@ -208,32 +215,29 @@ Based on comprehensive analysis across all conditions, several optimal intervent
 \item Minimal risk of backlash effects
 \end{itemize}
 
-\textbf{High-Resource Strategy - Extended Clustered**: Target 30\% of students in larger clusters with 1.5 SD increases. This strategy produces larger effects (+23.1\% cooperation increase) but requires more resources and careful implementation to avoid repulsion.
+\textbf{High-Resource Strategy - Extended Clustered}: Target 30\% of students in larger clusters with 1.5 SD increases. This strategy produces larger effects (+23.1\% cooperation increase) but requires more resources and careful implementation to avoid repulsion.
 
-\textbf{Low-Resource Strategy - Selective Central**: Target 15\% of high-centrality students with 1.0 SD increases. This strategy produces moderate effects (+12.4\% cooperation increase) with minimal resource requirements.
+\textbf{Low-Resource Strategy - Selective Central}: Target 15\% of high-centrality students with 1.0 SD increases. This strategy produces moderate effects (+12.4\% cooperation increase) with minimal resource requirements.
 
 \subsection{Context-Specific Recommendations}
 
 Different contexts require adapted strategies:
 
-\textbf{High-Diversity Contexts** (IQV > 0.8):
-\begin{itemize}
+\textbf{High-Diversity Contexts** (IQV > 0.8)}: \begin{itemize}
 \item Use higher intervention intensities (1.5-2.0 SD)
 \item Target larger proportions (25-35\%)
 \item Focus on friendship network centrality
 \item Expect larger effects and better persistence
 \end{itemize}
 
-\textbf{Low-Diversity Contexts** (IQV < 0.5):
-\begin{itemize}
+\textbf{Low-Diversity Contexts** (IQV < 0.5)}: \begin{itemize}
 \item Use moderate intensities (1.0 SD)
 \item Target smaller proportions (15-20\%)
 \item Focus on cross-ethnic bridge positions
 \item Expect modest effects requiring reinforcement
 \end{itemize}
 
-\textbf{Low-Tolerance Contexts** (baseline < 3.0):
-\begin{itemize}
+\textbf{Low-Tolerance Contexts** (baseline < 3.0)}: \begin{itemize}
 \item Use gradual implementation (multiple small doses)
 \item Target opinion leaders and teachers simultaneously
 \item Focus on building foundation before expansion
@@ -246,21 +250,21 @@ Different contexts require adapted strategies:
 
 Tolerance interventions can trigger unintended network changes:
 
-\textbf{Friendship Polarization**: In 12\% of simulations, strong tolerance interventions led to friendship network polarization, with high-tolerance and low-tolerance students forming separate clusters. This effect was most common with high-intensity interventions (≥1.5 SD) in low-diversity contexts.
+\textbf{Friendship Polarization}: In 12\% of simulations, strong tolerance interventions led to friendship network polarization, with high-tolerance and low-tolerance students forming separate clusters. This effect was most common with high-intensity interventions (≥1.5 SD) in low-diversity contexts.
 
-\textbf{Academic Performance Effects**: Tolerance interventions sometimes affected academic performance through changed study partner networks. Generally positive effects (+0.08 GPA increase on average), but some high-achieving minority students experienced decreased performance when interventions disrupted established academic support networks.
+\textbf{Academic Performance Effects}: Tolerance interventions sometimes affected academic performance through changed study partner networks. Generally positive effects (+0.08 GPA increase on average), but some high-achieving minority students experienced decreased performance when interventions disrupted established academic support networks.
 
-\textbf{Teacher-Student Relations**: Interventions occasionally strained relationships with teachers who held less tolerant attitudes, potentially undermining long-term sustainability.
+\textbf{Teacher-Student Relations}: Interventions occasionally strained relationships with teachers who held less tolerant attitudes, potentially undermining long-term sustainability.
 
 \subsection{Backlash Effects}
 
 Systematic analysis identified conditions that trigger backlash:
 
-\textbf{Intensity Thresholds**: Interventions exceeding 1.8 SD increases triggered backlash in 23\% of cases, particularly among students with strong pre-existing group identities.
+\textbf{Intensity Thresholds}: Interventions exceeding 1.8 SD increases triggered backlash in 23\% of cases, particularly among students with strong pre-existing group identities.
 
-\textbf{Targeting Errors**: Interventions that targeted students with strong intolerant attitudes (bottom 10\% of baseline distribution) frequently backfired, strengthening rather than weakening intolerance.
+\textbf{Targeting Errors}: Interventions that targeted students with strong intolerant attitudes (bottom 10\% of baseline distribution) frequently backfired, strengthening rather than weakening intolerance.
 
-\textbf{Implementation Speed**: Very rapid implementation (affecting >25% of students simultaneously) sometimes triggered reactive group formation and normative resistance.
+\textbf{Implementation Speed}: Very rapid implementation (affecting >25% of students simultaneously) sometimes triggered reactive group formation and normative resistance.
 
 \section{Sensitivity Analysis}
 
@@ -268,21 +272,21 @@ Systematic analysis identified conditions that trigger backlash:
 
 To assess robustness, simulations were repeated using parameter estimates ±1 standard error from the main analysis:
 
-\textbf{Influence Parameters**: Results remained qualitatively similar across the confidence interval for influence parameters. Effect sizes varied ±20\% but strategy rankings remained consistent.
+\textbf{Influence Parameters}: Results remained qualitatively similar across the confidence interval for influence parameters. Effect sizes varied ±20\% but strategy rankings remained consistent.
 
-\textbf{Selection Parameters**: Cooperation formation parameters showed greater sensitivity. Lower estimates reduced intervention effectiveness by up to 35\%, while higher estimates increased effectiveness by up to 45\%.
+\textbf{Selection Parameters}: Cooperation formation parameters showed greater sensitivity. Lower estimates reduced intervention effectiveness by up to 35\%, while higher estimates increased effectiveness by up to 45\%.
 
-\textbf{Network Parameters**: Variations in network evolution parameters had minimal impact on relative strategy effectiveness but affected absolute effect sizes.
+\textbf{Network Parameters}: Variations in network evolution parameters had minimal impact on relative strategy effectiveness but affected absolute effect sizes.
 
 \subsection{Alternative Model Specifications}
 
 Simulations using alternative model specifications confirmed main findings:
 
-\textbf{Linear Influence**: Models without attraction-repulsion effects showed similar strategy rankings but overestimated high-intensity intervention effectiveness by 40-60\%.
+\textbf{Linear Influence}: Models without attraction-repulsion effects showed similar strategy rankings but overestimated high-intensity intervention effectiveness by 40-60\%.
 
-\textbf{Simple Contagion**: Models using simple rather than complex contagion underestimated clustered targeting advantages by approximately 30\%.
+\textbf{Simple Contagion}: Models using simple rather than complex contagion underestimated clustered targeting advantages by approximately 30\%.
 
-\textbf{Static Networks**: Models holding networks constant showed similar tolerance diffusion patterns but underestimated cooperation effects by 25-40\%.
+\textbf{Static Networks}: Models holding networks constant showed similar tolerance diffusion patterns but underestimated cooperation effects by 25-40\%.
 
 \section{Key Empirical Achievements}
 
@@ -290,13 +294,13 @@ Simulations using alternative model specifications confirmed main findings:
 
 The tolerance intervention research has achieved exceptional statistical outcomes that meet the highest standards for computational social science research:
 
-\textbf{Primary Effect Size**: The attraction-repulsion tolerance influence mechanism demonstrated a large effect size of Cohen's d = 0.837 (95\% CI [0.234, 1.441]), placing it in the top 20\% of effect sizes in social psychology research. This effect size indicates that tolerance interventions can produce meaningful, observable changes in social behavior.
+\textbf{Primary Effect Size}: The attraction-repulsion tolerance influence mechanism demonstrated a large effect size of Cohen's d = 0.837 (95\% CI [0.234, 1.441]), placing it in the top 20\% of effect sizes in social psychology research. This effect size indicates that tolerance interventions can produce meaningful, observable changes in social behavior.
 
-\textbf{Statistical Significance**: The intervention effects achieved high statistical significance (p = 0.0074), well below the conventional α = 0.05 threshold and approaching the more stringent α = 0.01 level. This provides robust evidence against the null hypothesis of no intervention effect.
+\textbf{Statistical Significance}: The intervention effects achieved high statistical significance (p = 0.0074), well below the conventional α = 0.05 threshold and approaching the more stringent α = 0.01 level. This provides robust evidence against the null hypothesis of no intervention effect.
 
-\textbf{Convergence Quality**: All SAOM models achieved excellent convergence with maximum t-ratios < 0.1, indicating stable and reliable parameter estimates. The convergence status of "CONVERGED" across all specifications ensures that the statistical inferences are trustworthy.
+\textbf{Convergence Quality}: All SAOM models achieved excellent convergence with maximum t-ratios < 0.1, indicating stable and reliable parameter estimates. The convergence status of "CONVERGED" across all specifications ensures that the statistical inferences are trustworthy.
 
-\textbf{Sample Adequacy**: With 60 students across 3 classrooms and a network density of 0.230, the study achieved adequate statistical power for detecting medium to large effects while maintaining ecological validity typical of classroom environments.
+\textbf{Sample Adequacy}: With 60 students across 3 classrooms and a network density of 0.230, the study achieved adequate statistical power for detecting medium to large effects while maintaining ecological validity typical of classroom environments.
 
 \subsection{Practical Significance}
 
@@ -304,9 +308,9 @@ Beyond statistical significance, the results demonstrate substantial practical s
 
 \textbf{Intervention Effectiveness}: Clustered targeting strategies produce 18.9\% increases in interethnic cooperation, representing meaningful improvements in social cohesion that would be observable to teachers, administrators, and students themselves.
 
-\textbf{Effect Persistence**: Interventions maintain 76\% of their effectiveness at 12-month follow-up, indicating that the changes represent stable behavioral modifications rather than temporary compliance.
+\textbf{Effect Persistence}: Interventions maintain 76\% of their effectiveness at 12-month follow-up, indicating that the changes represent stable behavioral modifications rather than temporary compliance.
 
-\textbf{Cost-Effectiveness**: Network-based targeting strategies (central and clustered) consistently outperform random targeting by 2:1 ratios, providing practical guidance for optimizing limited intervention resources.
+\textbf{Cost-Effectiveness}: Network-based targeting strategies (central and clustered) consistently outperform random targeting by 2:1 ratios, providing practical guidance for optimizing limited intervention resources.
 
 \textbf{Scalability}: The multilevel analysis demonstrates that effects remain significant when accounting for classroom nesting, suggesting that findings would generalize to larger-scale implementations.
 
@@ -316,24 +320,24 @@ The research demonstrates several indicators of methodological rigor:
 
 \textbf{Theoretical Grounding}: The attraction-repulsion mechanism represents a theoretically-informed innovation that advances understanding of social influence processes beyond simple linear models.
 
-\textbf{Model Validation**: Comprehensive goodness-of-fit tests confirm that the SAOM adequately captures network and behavior dynamics, with all auxiliary statistics showing non-significant deviations (p > .05).
+\textbf{Model Validation}: Comprehensive goodness-of-fit tests confirm that the SAOM adequately captures network and behavior dynamics, with all auxiliary statistics showing non-significant deviations (p > .05).
 
 \textbf{Robustness Checks}: Sensitivity analyses across alternative model specifications confirm that findings are not dependent on specific modeling choices, with effect sizes varying by less than ±20\% across specifications.
 
-\textbf{Publication Standards**: All visualizations meet publication quality standards at 300+ DPI resolution, with comprehensive documentation enabling full replication of analyses.
+\textbf{Publication Standards}: All visualizations meet publication quality standards at 300+ DPI resolution, with comprehensive documentation enabling full replication of analyses.
 
 \section{Discussion}
 
 The simulation results provide strong evidence for several key conclusions:
 
-\textbf{Clustered Targeting Superiority**: Consistent with complex contagion theory, clustered targeting outperforms other strategies across most conditions. This finding has important implications for intervention design, suggesting that creating "tolerance clusters" is more effective than targeting isolated influential individuals.
+\textbf{Clustered Targeting Superiority}: Consistent with complex contagion theory, clustered targeting outperforms other strategies across most conditions. This finding has important implications for intervention design, suggesting that creating "tolerance clusters" is more effective than targeting isolated influential individuals.
 
-\textbf{Moderate Intensity Optimization**: The attraction-repulsion mechanism creates an optimal intervention intensity around 1.0-1.5 SD. Higher intensities risk triggering backlash, while lower intensities fail to generate cascading change.
+\textbf{Moderate Intensity Optimization}: The attraction-repulsion mechanism creates an optimal intervention intensity around 1.0-1.5 SD. Higher intensities risk triggering backlash, while lower intensities fail to generate cascading change.
 
-\textbf{Context Dependency**: Intervention effectiveness varies dramatically across contexts. Diversity, baseline tolerance, and institutional support all moderate effects, requiring adaptive implementation strategies.
+\textbf{Context Dependency}: Intervention effectiveness varies dramatically across contexts. Diversity, baseline tolerance, and institutional support all moderate effects, requiring adaptive implementation strategies.
 
-\textbf{Temporal Complexity**: Intervention effects unfold over extended periods with distinct phases. This suggests that evaluation should occur at multiple time points and that patience is required for full effects to emerge.
+\textbf{Temporal Complexity}: Intervention effects unfold over extended periods with distinct phases. This suggests that evaluation should occur at multiple time points and that patience is required for full effects to emerge.
 
-\textbf{Unintended Consequences**: While generally positive, tolerance interventions can produce negative side effects under certain conditions. Careful monitoring and adaptive implementation can minimize these risks.
+\textbf{Unintended Consequences}: While generally positive, tolerance interventions can produce negative side effects under certain conditions. Careful monitoring and adaptive implementation can minimize these risks.
 
 These findings provide the foundation for evidence-based intervention recommendations presented in the discussion chapter.
