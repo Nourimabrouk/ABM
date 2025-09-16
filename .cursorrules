@@ -1,0 +1,341 @@
+# Agent-Based Models for Statistical Sociology - Cursor AI Rules
+
+## Project Context
+You are working on a PhD dissertation project focused on Agent-Based Models (ABM) in statistical sociology, specifically using Stochastic Actor-Oriented Models (SAOM) via RSiena. The research investigates social norm interventions to promote interethnic cooperation through tolerance in educational settings. This is high-stakes academic research requiring rigorous methodology, reproducible results, and publication-quality code.
+
+## R and RSiena Integration
+
+### R Environment Setup
+- R 4.5.1 is installed at: `C:\Program Files\R\R-4.5.1\`
+- Use R executable: `"C:\Program Files\R\R-4.5.1\bin\x64\R.exe"`
+- Use Rscript: `"C:\Program Files\R\R-4.5.1\bin\x64\Rscript.exe"`
+- Always use full paths when calling R from VS Code terminal
+
+### RSiena Requirements
+- Primary framework: RSiena for Stochastic Actor-Oriented Models (SAOM)
+- Custom C++ effects may be required for attraction-repulsion mechanisms
+- Support complex contagion modeling (multiple simultaneous exposures)
+- Implement friend-based influence effects (not classroom-wide)
+- Handle multi-level data: 105 classes nested in 3 schools across 3 time waves
+
+### R Code Standards
+- Use roxygen2 documentation for all functions
+- Implement proper error handling with tryCatch()
+- Include reproducible random seeds: set.seed()
+- Follow Tidyverse style guide for R code
+- Use data.table or dplyr for efficient data manipulation
+- Generate publication-ready plots with ggplot2
+- Export results in multiple formats (CSV, RDS, LaTeX)
+
+### R Package Dependencies
+```r
+# Core packages for SAOM analysis
+install.packages(c(
+    "RSiena",           # Stochastic Actor-Oriented Models
+    "RSienaTest",       # Testing and diagnostics
+    "network",          # Network data structures
+    "sna",              # Social Network Analysis
+    "igraph",           # Graph analysis and visualization
+    "tidyverse",        # Data manipulation and visualization
+    "data.table",       # High-performance data operations
+    "parallel",         # Parallel processing
+    "foreach",          # Parallel loops
+    "doParallel",       # Parallel backend
+    "ggplot2",          # Publication-quality plots
+    "knitr",            # Report generation
+    "rmarkdown",        # Dynamic documents
+    "gridExtra",        # Multiple plots arrangement
+    "scales",           # Plot scaling and formatting
+    "RColorBrewer"      # Color palettes for visualization
+))
+```
+
+## Code Quality Standards
+
+### Academic Rigor
+- All statistical models must include proper validation and significance testing
+- Code must be fully reproducible with documented random seeds
+- Include comprehensive docstrings following NumPy style
+- Add type hints for all functions and methods
+- Implement proper error handling and edge case management
+- Follow PEP 8 style guidelines with academic documentation standards
+
+### ABM-Specific Requirements
+- Primary: RSiena for Stochastic Actor-Oriented Models (SAOM)
+- Secondary: Mesa framework for complementary ABM simulations
+- Implement network-based models using RSiena's sienaFit() approach
+- Support longitudinal network-behavior co-evolution analysis
+- Include empirical calibration from real-world intervention data
+- Optimize for parallel execution of model estimation and simulation
+- Handle intervention design scenarios (who to target, timing, intensity)
+
+### Statistical Analysis Standards
+- Use appropriate statistical tests with documented assumptions
+- Include confidence intervals, effect sizes, and power analysis
+- Implement sensitivity analysis and robustness checks
+- Generate publication-ready visualizations (300+ DPI)
+- Export results in standard academic formats (CSV, LaTeX tables)
+- Document all methodological choices and limitations
+
+## Development Patterns
+
+### File Organization
+```
+src/
+├── models/          # RSiena SAOM implementations and Mesa ABMs
+├── data_prep/       # Data cleaning and network construction
+├── effects/         # Custom RSiena effects (C++ integration)
+├── analysis/        # Statistical analysis and intervention scenarios
+├── simulation/      # Monte Carlo simulation from fitted models
+├── visualization/   # Publication-quality network plots and results
+└── utils/          # R/Python integration utilities
+R/
+├── siena_models/    # Core RSiena model specifications
+├── custom_effects/  # Friend-based influence and complex contagion
+├── data_analysis/   # Descriptive statistics and model diagnostics
+├── intervention/    # Intervention design scenario testing
+└── plots/          # R visualization scripts
+```
+
+### Code Structure
+- RSiena: Use sienaDataCreate() for network-behavior data objects
+- RSiena: Create modular effect specifications with getEffects()
+- Python: Use dataclasses for intervention scenario parameters
+- R: Implement functions for model diagnostics and goodness-of-fit
+- Include configuration management for extensive parameter sweeps
+- Add logging for debugging long-running SAOM estimations
+- Create wrapper functions for R/Python interoperability
+
+### Testing Requirements
+- Test RSiena model convergence and goodness-of-fit
+- Validate custom effects implementation with known results
+- Include integration tests for complete SAOM estimation
+- Add statistical tests for intervention scenario outcomes
+- Implement performance benchmarks for large network estimation
+- Create regression tests to detect changes in model behavior
+- Test R/Python integration pipeline end-to-end
+
+## Performance Optimization
+
+### Computational Efficiency
+- Use RSiena's built-in parallel processing capabilities
+- Optimize C++ custom effects for computational speed
+- Profile R code using Rprof() for bottleneck identification
+- Use parallel processing for intervention scenario testing
+- Implement efficient network data structures in R
+- Cache intermediate SAOM estimation results
+
+### Memory Management
+- Monitor memory usage during SAOM estimation (can be intensive)
+- Use efficient data.table operations for large longitudinal datasets
+- Implement checkpointing for long-running parameter sweeps
+- Clear large RSiena objects after model fitting
+- Manage R workspace memory with rm() and gc() strategically
+
+## Research Best Practices
+
+### Reproducibility
+- Set and document random seeds for all stochastic processes
+- Version control all configuration files and parameters
+- Include exact dependency versions in requirements
+- Document computational environment and hardware specs
+- Provide detailed setup and execution instructions
+
+### Documentation
+- Write clear README files for each model
+- Document theoretical foundations and assumptions
+- Include parameter descriptions and valid ranges
+- Provide usage examples and expected outputs
+- Create methodology documentation for replication
+
+### Data Management
+- Separate raw data from processed/simulated data
+- Implement proper data validation and cleaning
+- Use standard formats (CSV, HDF5, Parquet) for data storage
+- Document data sources and transformation steps
+- Include data dictionaries for all variables
+
+## Collaboration Guidelines
+
+### Version Control
+- Use descriptive commit messages with research context
+- Create feature branches for experimental models
+- Tag stable model versions for paper submissions
+- Include proper .gitignore for Python research projects
+- Document major changes in CHANGELOG
+
+### Code Review
+- Focus on statistical validity and methodological soundness
+- Check reproducibility of results
+- Verify performance and scalability
+- Review documentation completeness
+- Ensure adherence to academic standards
+
+## Common Patterns
+
+### RSiena Model Implementation
+```r
+# Core SAOM model specification
+create_saom_model <- function(networks, behavior, covariates) {
+  # Create RSiena data object
+  siena_data <- sienaDataCreate(
+    networks = networks,
+    behavior = behavior,
+    attributes = covariates
+  )
+
+  # Specify effects
+  effects <- getEffects(siena_data)
+  effects <- includeEffects(effects, transTrip, cycle3)  # Network effects
+  effects <- includeEffects(effects, avAlt, name="behavior")  # Behavior effects
+
+  # Custom attraction-repulsion effect for friends
+  effects <- includeEffects(effects,
+    interaction1 = "friendship",
+    name = "behavior",
+    type = "eval",
+    effect = "attractionRepulsion"
+  )
+
+  return(list(data = siena_data, effects = effects))
+}
+
+# Estimation and simulation
+estimate_model <- function(siena_data, effects, algorithm_settings = NULL) {
+  if (is.null(algorithm_settings)) {
+    algorithm_settings <- sienaAlgorithmCreate(
+      projname = "tolerance_intervention",
+      nsub = 6,  # Number of sub-phases
+      n3 = 3000  # Number of iterations in phase 3
+    )
+  }
+
+  results <- siena07(algorithm_settings,
+                     data = siena_data,
+                     effects = effects)
+  return(results)
+}
+```
+
+### Statistical Analysis
+```r
+# Intervention scenario analysis
+analyze_intervention_outcomes <- function(simulation_results, baseline_results) {
+  # Calculate intervention effectiveness metrics
+  cooperation_change <- mean(simulation_results$cooperation_final -
+                           baseline_results$cooperation_final)
+
+  tolerance_persistence <- cor(simulation_results$tolerance_t1,
+                              simulation_results$tolerance_final)
+
+  # Statistical significance testing
+  intervention_test <- t.test(
+    simulation_results$cooperation_final,
+    baseline_results$cooperation_final,
+    alternative = "two.sided"
+  )
+
+  # Effect size calculation
+  cohen_d <- (mean(simulation_results$cooperation_final) -
+             mean(baseline_results$cooperation_final)) /
+             sqrt(((var(simulation_results$cooperation_final) +
+                   var(baseline_results$cooperation_final)) / 2))
+
+  return(list(
+    cooperation_change = cooperation_change,
+    tolerance_persistence = tolerance_persistence,
+    p_value = intervention_test$p.value,
+    confidence_interval = intervention_test$conf.int,
+    effect_size = cohen_d
+  ))
+}
+```
+
+### Visualization
+```r
+# Publication-ready network and results visualization
+create_network_plot <- function(network_data, node_attributes, layout_type = "fruchterman.reingold") {
+  library(ggplot2)
+  library(ggraph)
+  library(igraph)
+
+  # Convert to igraph object
+  graph <- graph_from_data_frame(network_data, vertices = node_attributes)
+
+  # Create publication-quality plot
+  p <- ggraph(graph, layout = layout_type) +
+    geom_edge_link(alpha = 0.3, color = "grey50") +
+    geom_node_point(aes(color = ethnicity, size = tolerance), alpha = 0.8) +
+    scale_color_manual(values = c("German" = "#2E86AB", "Turkish" = "#A23B72")) +
+    scale_size_continuous(range = c(2, 6)) +
+    theme_void() +
+    theme(
+      legend.position = "bottom",
+      plot.title = element_text(size = 14, hjust = 0.5),
+      legend.title = element_text(size = 12),
+      legend.text = element_text(size = 10)
+    ) +
+    labs(
+      title = "Social Network with Tolerance Levels",
+      color = "Ethnicity",
+      size = "Tolerance"
+    )
+
+  # Save at publication resolution
+  ggsave("network_plot.png", p, width = 8, height = 6, dpi = 300)
+  return(p)
+}
+```
+
+## Error Prevention
+
+### Common SAOM/RSiena Pitfalls
+- Ensure RSiena model convergence (t-ratios < 0.1, overall convergence < 0.25)
+- Check for degeneracy in network simulation outcomes
+- Validate custom effects implementation with simple test cases
+- Handle missing data appropriately in longitudinal networks
+- Test intervention scenarios at realistic parameter ranges
+- Ensure proper random seed management for reproducible simulations
+
+### Statistical Issues
+- Always test statistical assumptions before applying tests
+- Use appropriate corrections for multiple comparisons
+- Report effect sizes alongside p-values
+- Include power analysis for negative results
+- Document all methodological decisions
+
+## Performance Targets
+
+### Execution Speed
+- RSiena model estimation should converge within reasonable time limits
+- Intervention scenario simulations should utilize parallel processing
+- Network operations should be optimized for sparse matrices
+- Results caching should prevent redundant SAOM re-estimation
+
+### Code Quality Metrics
+- Test coverage should exceed 90% for core model components
+- All R functions should have complete roxygen2 documentation
+- Code complexity should remain manageable (cyclomatic < 10)
+- Dependencies should be minimal and academically appropriate
+
+## R Integration Commands
+
+### Running R Scripts from VS Code Terminal
+```bash
+# Run R script with full path
+"C:\Program Files\R\R-4.5.1\bin\x64\Rscript.exe" script_name.R
+
+# Run R interactively with full path
+"C:\Program Files\R\R-4.5.1\bin\x64\R.exe"
+
+# Install RSiena and dependencies (run once)
+"C:\Program Files\R\R-4.5.1\bin\x64\Rscript.exe" -e "install.packages(c('RSiena', 'RSienaTest', 'network', 'sna', 'igraph', 'tidyverse'))"
+
+# Run main analysis pipeline
+"C:\Program Files\R\R-4.5.1\bin\x64\Rscript.exe" R/siena_models/main_analysis.R
+
+# Execute intervention scenarios
+"C:\Program Files\R\R-4.5.1\bin\x64\Rscript.exe" R/intervention/scenario_testing.R
+```
+
+Remember: This is PhD-level research investigating social norm interventions to promote interethnic cooperation through tolerance. Every design decision should be methodologically sound, theoretically grounded, and defensible in an academic context. The SAOM approach allows for rigorous modeling of network-behavior co-evolution with empirical calibration.

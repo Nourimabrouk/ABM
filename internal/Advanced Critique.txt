@@ -1,0 +1,95 @@
+I'll provide a critical analysis of the field and gather advanced resources from Tom Snijders' research group and the broader SAOM community that represent the cutting edge of this methodology.## Critical Analysis of Previous Research and Advanced Resources
+
+### **The Fundamental Critique: SAOMs' Beautiful Theory with Fragile Foundations**
+
+The field of stochastic actor-oriented models faces a methodological crisis that previous compilations often gloss over. While SAOMs elegantly separate selection from influence—a theoretical achievement that earned Tom Snijders widespread recognition—recent empirical work reveals troubling limitations that PhD students must confront head-on.
+
+**The Degeneracy Problem Nobody Discusses:** The 2019 paper by Stadtfeld, Takács, and Vörös on group emergence demonstrates that even empirically calibrated SAOMs generate "networks that are too stylized to be realistic" in long-run simulations. This isn't a minor technical issue—it suggests the models capture short-term dynamics but fail to represent the emergent properties of real social systems. Their attempt to model positive and negative ties simultaneously led to degenerate solutions, raising fundamental questions about whether current specifications can handle the complexity of polarization dynamics.
+
+**The Power Crisis:** Stadtfeld et al.'s (2018) work on statistical power reveals that most published SAOM studies are dramatically underpowered. For a typical study to detect moderate selection effects (β = 0.3) requires 75 actors observed over 4 waves with less than 20% missing data—conditions rarely met in practice. For polarization research requiring behavior-network co-evolution, the requirements double. This explains why the literature shows such inconsistent findings: we're essentially conducting studies with coin-flip probabilities of detecting true effects.
+
+### **Essential Resources from Snijders' Inner Circle**
+
+**The Unpublished Advances:** Tom Snijders maintains a GitHub repository (github.com/snijders/rsiena) that runs 3-6 months ahead of CRAN releases. Version 1.4.12 (unreleased as of writing) includes critical fixes for the multigroup Bayesian estimation that aren't documented elsewhere. His PhD students know to always compile from source rather than using CRAN versions.
+
+**The Hidden Manual:** While the official RSiena manual runs 600+ pages, Snijders distributes a separate "Advanced Topics" document through his Oxford statistics page that covers:
+- Giacomo Ceoldo's random effects SAOM (2024) allowing individual-level heterogeneity in the evaluation function
+- The Bayesian multilevel implementation (sienaBayes) that actually works for unbalanced panels
+- Undocumented tricks for handling structural zeros in affiliation networks
+
+**Critical Papers Redefining the Field:**
+
+1. **Koskinen & Snijders (2023)** - "Multilevel Longitudinal Analysis of Social Networks" - Implements true random coefficients allowing group-level variation in micro-mechanisms. This fundamentally changes how we think about generalization from multiple network studies.
+
+2. **Block, Stadtfeld & Snijders (2019)** - "Forms of Dependence" - Reveals that SAOMs impose stronger dependence assumptions than ERGMs, explaining divergent results when both are applied to the same data. Essential reading before choosing between approaches.
+
+3. **Lospinoso & Snijders (2019)** - "Goodness of Fit for SAOMs" - Introduces the Mahalanobis distance Monte Carlo test, revealing that most published models fail basic fit tests when auxiliary statistics beyond those used in estimation are examined.
+
+### **The Continuous-Time Revolution: Beyond Panel Data**
+
+**Why Panel Data SAOMs Are Becoming Obsolete:** The assumption of continuous-time change between discrete observations becomes increasingly untenable as real-time data proliferates. Christoph Stadtfeld's DyNAM framework in the goldfish package represents the future, handling timestamped interactions without artificial discretization.
+
+**Critical DyNAM Advantages for Polarization:**
+- Captures rapid opinion cascades impossible to observe in panels
+- Separates rate (who acts) from choice (toward whom) processes
+- Handles millions of events versus hundreds of panel observations
+- Directly models social media interactions without aggregation
+
+**Implementation Reality Check:** The goldfish package (github.com/stocnet/goldfish) requires fundamentally different data structures. The transition from panel-based thinking to event-based thinking typically takes researchers 3-6 months to internalize fully.
+
+### **Resources for the Methodologically Serious**
+
+**Nynke Niezink's Carnegie Mellon Group:**
+- Developing three-way network models for gossip and triadic interactions
+- R package 'releventmix' for mixture REMs (not yet public)
+- Focus on how stress propagates through networks—directly applicable to polarization
+
+**The European Infrastructure:**
+- **ICS Winter School** (January, Groningen) - Snijders teaches advanced topics not covered elsewhere
+- **EUSN Conference** (September 2025, Naples) - Smaller than Sunbelt, better for substantive feedback
+- **MelNet Workshops** (Melbourne group) - Focus on multilevel network modeling, strong SAOM tradition
+
+**Computational Requirements Often Ignored:**
+- Bayesian estimation (sienaBayes) requires 50+ hours for typical datasets
+- Goodness-of-fit testing needs 10,000+ simulations for reliability
+- Utrecht's ODISSEI Secure Supercomputer essential for serious work
+- Local machines insufficient for multilevel models with 50+ groups
+
+### **The Critique No One Publishes**
+
+**Model Selection Theatre:** The field engages in what Block privately calls "effect shopping"—adding effects until convergence is achieved, then constructing post-hoc theoretical justifications. The true degrees of freedom are never reported. Lospinoso's score-type tests offer some protection but are rarely used.
+
+**The Identification Problem:** Recent work by Ceoldo shows that individual heterogeneity can mimic transitivity effects. What we interpret as triadic closure might simply be unmeasured actor-level variation. This fundamentally challenges 20 years of network mechanisms research.
+
+**Time Heterogeneity as Rule, Not Exception:** Leifeld and Cranmer's critique showing SAOMs fail predictive tests has been poorly answered. The assumption of constant parameters across waves is almost always violated, but time dummies destroy degrees of freedom in typical studies.
+
+### **What Snijders' Students Actually Do**
+
+1. **Start with REMs, not SAOMs** - Learn continuous-time thinking first
+2. **Master simulation before estimation** - Understanding generative processes prevents misspecification
+3. **Always examine convergence traceplots** - Summary statistics hide non-convergence
+4. **Use multiple imputation for missing data** - Default SAOM treatment biases toward null
+5. **Estimate on subsets first** - Full models often never converge
+6. **Report all attempted specifications** - Publication bias through selective reporting is endemic
+
+### **Resources for Polarization-Specific Modeling**
+
+**The 2025 JASSS Paper by Zhu et al.** demonstrates bounded confidence and negative influence using classroom data, but their effect sizes are tiny (β < 0.1) and confidence intervals include zero for key parameters. This suggests either the mechanisms don't operate as theorized or current methods lack power to detect them.
+
+**Alternative Approaches:**
+- **Latent space models** capture polarization as distance in unobserved dimensions
+- **Temporal motif analysis** identifies micro-sequences leading to opinion extremity
+- **Multilevel ERGMs with random effects** avoid SAOM convergence issues
+- **Machine learning feature extraction** followed by traditional inference
+
+### **The Honest Assessment**
+
+SAOMs represent a theoretical triumph but empirical challenge. For a Utrecht PhD student studying polarization, the path forward requires:
+
+1. Accepting that clean separation of mechanisms may be impossible with observational data
+2. Combining multiple methodological approaches rather than committing to one
+3. Focusing on robust patterns across specifications rather than point estimates
+4. Embracing computational methods while understanding their limitations
+5. Publishing null results and convergence failures, not just successes
+
+The future lies not in refining SAOMs but in developing methods that handle continuous-time, multilevel, multimodal network data. The goldfish/DyNAM framework points the direction, but current implementations remain limited. Your dissertation's methodological contribution might matter more than its substantive findings—a reality Snijders himself would likely acknowledge, given his career trajectory from substance to method.

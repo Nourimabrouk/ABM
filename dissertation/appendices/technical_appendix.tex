@@ -1,0 +1,612 @@
+\chapter{Technical Appendix}
+
+\section{SAOM Implementation Details}
+
+\subsection{RSiena Model Specification}
+
+This appendix provides detailed technical specifications for the Stochastic Actor-Oriented Models used in the analysis. All models were estimated using RSiena version 1.3.14 in R version 4.3.0.
+
+\subsubsection{Network Evolution Effects}
+
+\textbf{Friendship Network Effects:}
+\begin{lstlisting}[language=R, caption=Friendship Network Model Specification]
+# Structural effects
+myeff <- includeEffects(myeff, outAct, type="friendship")
+myeff <- includeEffects(myeff, reciprocity, type="friendship")
+myeff <- includeEffects(myeff, transTrip, type="friendship")
+myeff <- includeEffects(myeff, cycle3, type="friendship")
+
+# Homophily effects
+myeff <- includeEffects(myeff, sameX, interaction1="ethnicity",
+                       type="friendship")
+myeff <- includeEffects(myeff, sameX, interaction1="gender",
+                       type="friendship")
+myeff <- includeEffects(myeff, simX, interaction1="gpa",
+                       type="friendship")
+
+# Behavior effects
+myeff <- includeEffects(myeff, simX, interaction1="tolerance",
+                       type="friendship")
+myeff <- includeEffects(myeff, absDiffX, interaction1="tolerance",
+                       type="friendship")
+\end{lstlisting}
+
+\textbf{Cooperation Network Effects:}
+\begin{lstlisting}[language=R, caption=Cooperation Network Model Specification]
+# Structural effects
+myeff <- includeEffects(myeff, outAct, type="cooperation")
+myeff <- includeEffects(myeff, reciprocity, type="cooperation")
+myeff <- includeEffects(myeff, transTrip, type="cooperation")
+
+# Multiplex effects
+myeff <- includeEffects(myeff, crprod, interaction1="friendship",
+                       type="cooperation")
+
+# Homophily effects
+myeff <- includeEffects(myeff, sameX, interaction1="ethnicity",
+                       type="cooperation")
+myeff <- includeEffects(myeff, sameX, interaction1="gender",
+                       type="cooperation")
+
+# Behavior-network interactions
+myeff <- includeEffects(myeff, X.inPop, interaction1="tolerance",
+                       type="cooperation")
+\end{lstlisting}
+
+\subsubsection{Behavior Evolution Effects}
+
+\begin{lstlisting}[language=R, caption=Tolerance Behavior Model Specification]
+# Shape effects
+myeff <- includeEffects(myeff, linear, type="behavior",
+                       name="tolerance")
+myeff <- includeEffects(myeff, quad, type="behavior",
+                       name="tolerance")
+
+# Average similarity effects
+myeff <- includeEffects(myeff, avSim, interaction1="friendship",
+                       type="behavior", name="tolerance")
+
+# Individual effects
+myeff <- includeEffects(myeff, effFrom, interaction1="gender",
+                       type="behavior", name="tolerance")
+myeff <- includeEffects(myeff, effFrom, interaction1="ethnicity",
+                       type="behavior", name="tolerance")
+
+# Network position effects
+myeff <- includeEffects(myeff, indegAct, interaction1="friendship",
+                       type="behavior", name="tolerance")
+myeff <- includeEffects(myeff, outdegAct, interaction1="friendship",
+                       type="behavior", name="tolerance")
+\end{lstlisting}
+
+\subsection{Custom Effect Implementation}
+
+\subsubsection{Attraction-Repulsion Effect}
+
+The attraction-repulsion effect was implemented as a custom user-defined effect in RSiena:
+
+\begin{lstlisting}[language=C++, caption=Attraction-Repulsion Effect C++ Code]
+#include "BehaviorEffect.h"
+#include "network/Network.h"
+#include "network/IncidentTieIterator.h"
+#include "data/Data.h"
+#include "data/BehaviorLongitudinalData.h"
+
+class AttractionRepulsionEffect : public BehaviorEffect {
+public:
+    AttractionRepulsionEffect(const EffectInfo * pEffectInfo,
+                             bool parameter2);
+
+    virtual double calculateContribution(int i) const;
+    virtual double egoStatistic(int i, double value) const;
+
+private:
+    double theta_min;
+    double theta_max;
+    double alpha;
+    double beta;
+};
+
+double AttractionRepulsionEffect::calculateContribution(int i) const {
+    double statistic = 0;
+    const Network * pNetwork = this->pNetwork();
+
+    for (IncidentTieIterator iter = pNetwork->outTies(i);
+         iter.valid(); iter.next()) {
+        int j = iter.actor();
+        double diff = this->value(i) - this->value(j);
+        double abs_diff = fabs(diff);
+
+        if (abs_diff < theta_min) {
+            // No influence zone
+            continue;
+        } else if (abs_diff <= theta_max) {
+            // Attraction zone
+            statistic += -alpha * diff;
+        } else {
+            // Repulsion zone
+            statistic += beta * diff;
+        }
+    }
+
+    return statistic;
+}
+
+double AttractionRepulsionEffect::egoStatistic(int i, double value) const {
+    double statistic = 0;
+    const Network * pNetwork = this->pNetwork();
+
+    for (IncidentTieIterator iter = pNetwork->outTies(i);
+         iter.valid(); iter.next()) {
+        int j = iter.actor();
+        double diff = value - this->value(j);
+        double abs_diff = fabs(diff);
+
+        if (abs_diff < theta_min) {
+            continue;
+        } else if (abs_diff <= theta_max) {
+            statistic += -alpha * diff;
+        } else {
+            statistic += beta * diff;
+        }
+    }
+
+    return statistic;
+}
+\end{lstlisting}
+
+\subsubsection{Complex Contagion Effect}
+
+\begin{lstlisting}[language=C++, caption=Complex Contagion Effect Implementation]
+class ComplexContagionEffect : public BehaviorEffect {
+public:
+    ComplexContagionEffect(const EffectInfo * pEffectInfo);
+    virtual double calculateContribution(int i) const;
+
+private:
+    double threshold;
+    int min_adopters;
+};
+
+double ComplexContagionEffect::calculateContribution(int i) const {
+    double statistic = 0;
+    const Network * pNetwork = this->pNetwork();
+
+    int high_tolerance_friends = 0;
+    for (IncidentTieIterator iter = pNetwork->outTies(i);
+         iter.valid(); iter.next()) {
+        int j = iter.actor();
+        if (this->value(j) > threshold) {
+            high_tolerance_friends++;
+        }
+    }
+
+    if (high_tolerance_friends >= min_adopters) {
+        statistic = 1.0;
+    }
+
+    return statistic;
+}
+\end{lstlisting}
+
+\subsection{Parameter Estimation Procedures}
+
+\subsubsection{Method of Moments Estimation}
+
+Parameter estimation used the Method of Moments (MoM) approach implemented in RSiena. The estimation algorithm proceeds as follows:
+
+\begin{enumerate}
+\item Initialize parameter vector $\theta_0$
+\item For iteration $k$:
+   \begin{enumerate}
+   \item Simulate $n_{sim}$ networks using current parameters $\theta_k$
+   \item Calculate target statistics $s_{obs}$ from observed data
+   \item Calculate simulated statistics $s_{sim}(\theta_k)$ from simulations
+   \item Update parameters: $\theta_{k+1} = \theta_k + a_k D_k^{-1}(s_{obs} - s_{sim}(\theta_k))$
+   \end{enumerate}
+\item Continue until convergence: $|t_k| < 0.1$ for all parameters
+\end{enumerate}
+
+Where:
+\begin{itemize}
+\item $a_k$ is the gain parameter (typically 0.1)
+\item $D_k$ is the derivative matrix estimated from finite differences
+\item $t_k$ is the t-ratio for convergence assessment
+\end{itemize}
+
+\subsubsection{Convergence Diagnostics}
+
+Models were considered converged when:
+\begin{itemize}
+\item Individual t-ratios $|t_i| < 0.1$ for all parameters
+\item Overall maximum convergence ratio $< 0.25$
+\item Derivative matrix was non-singular
+\item At least 1000 simulation runs in Phase 3
+\end{itemize}
+
+\section{Simulation Implementation}
+
+\subsection{Intervention Simulation Procedure}
+
+Tolerance interventions were simulated using the following procedure:
+
+\begin{lstlisting}[language=R, caption=Intervention Simulation Procedure]
+simulate_intervention <- function(network_data, behavior_data,
+                                targets, intensity, duration) {
+    # Step 1: Implement intervention
+    behavior_data_post <- behavior_data
+    behavior_data_post[targets, ] <- behavior_data[targets, ] + intensity
+
+    # Step 2: Create simulation data object
+    sim_data <- sienaDataCreate(friendship = network_data$friendship,
+                               cooperation = network_data$cooperation,
+                               tolerance = behavior_data_post)
+
+    # Step 3: Run forward simulation
+    results <- siena07(sim_algorithm, data = sim_data,
+                      effects = effects_object,
+                      theta = estimated_parameters,
+                      returnDeps = TRUE,
+                      simOnly = TRUE)
+
+    # Step 4: Extract outcomes
+    extract_outcomes(results, duration)
+}
+\end{lstlisting}
+
+\subsection{Targeting Algorithm Implementation}
+
+\subsubsection{Centrality-Based Targeting}
+
+\begin{lstlisting}[language=R, caption=Centrality Targeting Algorithm]
+select_central_targets <- function(network, proportion, centrality_type) {
+    if (centrality_type == "degree") {
+        centrality <- rowSums(network)
+    } else if (centrality_type == "betweenness") {
+        centrality <- betweenness(graph_from_adjacency_matrix(network))
+    } else if (centrality_type == "eigenvector") {
+        centrality <- eigen_centrality(graph_from_adjacency_matrix(network))$vector
+    }
+
+    n_targets <- round(proportion * nrow(network))
+    targets <- order(centrality, decreasing = TRUE)[1:n_targets]
+
+    return(targets)
+}
+\end{lstlisting}
+
+\subsubsection{Clustered Targeting Algorithm}
+
+\begin{lstlisting}[language=R, caption=Clustered Targeting Algorithm]
+select_clustered_targets <- function(network, proportion, min_cluster_size = 3) {
+    # Find network communities
+    graph <- graph_from_adjacency_matrix(network)
+    communities <- cluster_louvain(graph)
+
+    # Calculate cluster sizes and densities
+    cluster_info <- data.frame(
+        cluster = 1:length(communities),
+        size = sizes(communities),
+        density = sapply(1:length(communities), function(i) {
+            members <- which(membership(communities) == i)
+            subgraph <- induced_subgraph(graph, members)
+            edge_density(subgraph)
+        })
+    )
+
+    # Select clusters meeting minimum size requirement
+    eligible_clusters <- cluster_info[cluster_info$size >= min_cluster_size, ]
+
+    # Rank clusters by size * density
+    eligible_clusters$score <- eligible_clusters$size * eligible_clusters$density
+    eligible_clusters <- eligible_clusters[order(eligible_clusters$score,
+                                               decreasing = TRUE), ]
+
+    # Select targets from top clusters
+    n_targets <- round(proportion * vcount(graph))
+    targets <- c()
+
+    for (i in 1:nrow(eligible_clusters)) {
+        cluster_id <- eligible_clusters$cluster[i]
+        cluster_members <- which(membership(communities) == cluster_id)
+
+        if (length(targets) + length(cluster_members) <= n_targets) {
+            targets <- c(targets, cluster_members)
+        } else {
+            remaining <- n_targets - length(targets)
+            # Select highest degree members within cluster
+            subgraph <- induced_subgraph(graph, cluster_members)
+            degrees <- degree(subgraph)
+            selected <- cluster_members[order(degrees, decreasing = TRUE)[1:remaining]]
+            targets <- c(targets, selected)
+            break
+        }
+    }
+
+    return(targets)
+}
+\end{lstlisting}
+
+\section{Data Processing and Quality Checks}
+
+\subsection{Network Data Validation}
+
+\begin{lstlisting}[language=R, caption=Network Data Validation Procedures]
+validate_network_data <- function(network_list) {
+    validation_results <- list()
+
+    for (wave in 1:length(network_list)) {
+        network <- network_list[[wave]]
+
+        # Check for structural consistency
+        validation_results[[paste0("wave_", wave)]] <- list(
+            # Symmetry check for undirected networks
+            symmetric = isSymmetric(network),
+
+            # Diagonal check (no self-loops)
+            no_self_loops = all(diag(network) == 0),
+
+            # Missing data check
+            missing_prop = sum(is.na(network)) / length(network),
+
+            # Density within reasonable bounds
+            density = sum(network, na.rm = TRUE) / sum(!is.na(network)),
+
+            # Connected components
+            n_components = length(decompose(graph_from_adjacency_matrix(network))),
+
+            # Degree distribution
+            degree_dist = summary(rowSums(network, na.rm = TRUE))
+        )
+    }
+
+    return(validation_results)
+}
+\end{lstlisting}
+
+\subsection{Behavior Data Preprocessing}
+
+\begin{lstlisting}[language=R, caption=Behavior Data Preprocessing]
+preprocess_tolerance_data <- function(tolerance_raw) {
+    # Handle missing values
+    tolerance_imputed <- tolerance_raw
+    for (i in 1:ncol(tolerance_imputed)) {
+        missing_idx <- is.na(tolerance_imputed[, i])
+        if (sum(missing_idx) > 0) {
+            # Use previous wave value if available
+            if (i > 1) {
+                tolerance_imputed[missing_idx, i] <- tolerance_imputed[missing_idx, i-1]
+            } else {
+                # Use individual mean for wave 1
+                tolerance_imputed[missing_idx, i] <- mean(tolerance_imputed[, i], na.rm = TRUE)
+            }
+        }
+    }
+
+    # Scale to integer values for RSiena (1-10 scale)
+    tolerance_scaled <- round((tolerance_imputed - 1) * 9 / 4) + 1
+    tolerance_scaled[tolerance_scaled < 1] <- 1
+    tolerance_scaled[tolerance_scaled > 10] <- 10
+
+    # Check for sufficient variation
+    for (i in 1:ncol(tolerance_scaled)) {
+        if (var(tolerance_scaled[, i]) < 0.5) {
+            warning(paste("Low variation in tolerance at wave", i))
+        }
+    }
+
+    return(tolerance_scaled)
+}
+\end{lstlisting}
+
+\section{Model Diagnostics}
+
+\subsection{Goodness-of-Fit Testing}
+
+\begin{lstlisting}[language=R, caption=Goodness-of-Fit Assessment]
+assess_model_fit <- function(results, data) {
+    # Extract estimated parameters
+    theta <- results$theta
+
+    # Simulate networks using estimated parameters
+    sim_results <- siena07(sienaAlgorithmCreate(simOnly = TRUE, nsub = 1000),
+                          data = data,
+                          effects = results$effects,
+                          theta = theta)
+
+    # Calculate auxiliary statistics
+    gof_results <- list()
+
+    # Network statistics
+    gof_results$degree_dist <- gof(sim_results, verbose = FALSE,
+                                  varName = "friendship",
+                                  statistics = c("DegreeDistribution"))
+
+    gof_results$geodesic_dist <- gof(sim_results, verbose = FALSE,
+                                    varName = "friendship",
+                                    statistics = c("GeodesicDistribution"))
+
+    gof_results$triad_census <- gof(sim_results, verbose = FALSE,
+                                   varName = "friendship",
+                                   statistics = c("TriadCensus"))
+
+    # Behavior statistics
+    gof_results$behavior_dist <- gof(sim_results, verbose = FALSE,
+                                    varName = "tolerance",
+                                    statistics = c("BehaviorDistribution"))
+
+    return(gof_results)
+}
+\end{lstlisting}
+
+\subsection{Sensitivity Analysis}
+
+\begin{lstlisting}[language=R, caption=Parameter Sensitivity Analysis]
+conduct_sensitivity_analysis <- function(base_results, data, parameter_range = 0.2) {
+    base_theta <- base_results$theta
+    base_se <- sqrt(diag(base_results$covtheta))
+
+    sensitivity_results <- list()
+
+    for (i in 1:length(base_theta)) {
+        param_name <- names(base_theta)[i]
+
+        # Test parameter +/- 1 SE
+        theta_low <- base_theta
+        theta_high <- base_theta
+
+        theta_low[i] <- base_theta[i] - base_se[i]
+        theta_high[i] <- base_theta[i] + base_se[i]
+
+        # Simulate with modified parameters
+        sim_low <- simulate_with_parameters(data, theta_low)
+        sim_high <- simulate_with_parameters(data, theta_high)
+        sim_base <- simulate_with_parameters(data, base_theta)
+
+        # Calculate outcome differences
+        sensitivity_results[[param_name]] <- list(
+            parameter_value = base_theta[i],
+            standard_error = base_se[i],
+            outcome_low = extract_key_outcomes(sim_low),
+            outcome_base = extract_key_outcomes(sim_base),
+            outcome_high = extract_key_outcomes(sim_high),
+            sensitivity = calculate_sensitivity_metrics(sim_low, sim_base, sim_high)
+        )
+    }
+
+    return(sensitivity_results)
+}
+\end{lstlisting}
+
+\section{Computational Infrastructure}
+
+\subsection{Parallel Processing Implementation}
+
+Due to the computational intensity of the simulation experiments, parallel processing was implemented using the following approach:
+
+\begin{lstlisting}[language=R, caption=Parallel Simulation Implementation]
+library(parallel)
+library(foreach)
+library(doParallel)
+
+run_parallel_simulations <- function(parameter_grid, n_cores = 8) {
+    # Set up parallel cluster
+    cl <- makeCluster(n_cores)
+    registerDoParallel(cl)
+
+    # Export necessary objects to cluster
+    clusterExport(cl, c("siena07", "sienaDataCreate", "estimated_parameters",
+                       "effects_object", "baseline_data"))
+
+    # Run simulations in parallel
+    results <- foreach(i = 1:nrow(parameter_grid),
+                      .combine = rbind,
+                      .packages = c("RSiena", "igraph")) %dopar% {
+
+        params <- parameter_grid[i, ]
+
+        # Generate replications for this parameter combination
+        replications <- replicate(100, {
+            simulate_intervention(
+                targets = select_targets(params$strategy, params$proportion),
+                intensity = params$intensity,
+                duration = 12
+            )
+        }, simplify = FALSE)
+
+        # Aggregate results
+        aggregate_replication_results(replications, params)
+    }
+
+    # Clean up cluster
+    stopCluster(cl)
+
+    return(results)
+}
+\end{lstlisting}
+
+\subsection{Memory Management}
+
+Large-scale simulations required careful memory management:
+
+\begin{lstlisting}[language=R, caption=Memory Management Procedures]
+manage_simulation_memory <- function() {
+    # Monitor memory usage
+    initial_memory <- pryr::mem_used()
+
+    # Clean up after each major simulation batch
+    cleanup_simulation_objects <- function() {
+        # Remove large temporary objects
+        rm(list = ls(pattern = "^temp_|^sim_"))
+
+        # Force garbage collection
+        gc(verbose = FALSE)
+
+        # Check memory usage
+        current_memory <- pryr::mem_used()
+
+        if (current_memory > initial_memory * 2) {
+            warning("Memory usage has doubled - consider reducing batch size")
+        }
+    }
+
+    return(cleanup_simulation_objects)
+}
+\end{lstlisting}
+
+\section{Reproducibility Information}
+
+\subsection{Session Information}
+
+All analyses were conducted using the following software environment:
+
+\begin{verbatim}
+R version 4.3.0 (2023-04-21)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 22.04.2 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3.10.0
+
+locale:
+[1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C
+[3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8
+[5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8
+[7] LC_PAPER=en_US.UTF-8       LC_NAME=C
+[9] LC_ADDRESS=C               LC_TELEPHONE=C
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base
+
+other attached packages:
+[1] RSiena_1.3.14    igraph_1.4.2     dplyr_1.1.2
+[4] ggplot2_3.4.2    parallel_4.3.0   foreach_1.5.2
+
+loaded via a namespace (and not attached):
+[1] compiler_4.3.0    tools_4.3.0       rstudioapi_0.14
+[4] Matrix_1.5-4      lattice_0.21-8
+\end{verbatim}
+
+\subsection{Random Seed Management}
+
+To ensure reproducibility, random seeds were managed systematically:
+
+\begin{lstlisting}[language=R, caption=Random Seed Management]
+set_reproducible_seeds <- function(base_seed = 12345) {
+    # Set main R seed
+    set.seed(base_seed)
+
+    # Generate seeds for each simulation condition
+    n_conditions <- 192
+    n_replications <- 100
+
+    condition_seeds <- sample.int(1000000, n_conditions)
+    replication_seeds <- matrix(sample.int(1000000, n_conditions * n_replications),
+                               nrow = n_conditions, ncol = n_replications)
+
+    return(list(condition_seeds = condition_seeds,
+               replication_seeds = replication_seeds))
+}
+\end{lstlisting}

@@ -1,0 +1,178 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 1: Introduction and Research Motivation
+% Agent-Based Models for Statistical Sociology
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Introduction and Research Motivation}
+\label{chap:introduction}
+
+\section{The Promise and Challenge of Computational Social Science}
+
+The emergence of computational social science represents one of the most significant methodological developments in the study of social phenomena over the past three decades \citep{lazer2009computational, watts2007twenty}. This interdisciplinary field combines traditional social science theory with advanced computational methods to understand complex social systems that were previously beyond the reach of conventional analytical approaches. Among the various computational methodologies that have gained prominence, Agent-Based Models (ABMs) stand out for their unique ability to bridge micro-level individual behaviors with macro-level social outcomes through the explicit modeling of social interactions \citep{macy2002factors, hedstrom2005dissecting}.
+
+Agent-Based Models offer a powerful framework for investigating how simple rules governing individual behavior can give rise to complex collective phenomena \citep{epstein2006generative}. In the context of social science research, ABMs provide a natural way to operationalize theoretical concepts about human behavior, social influence, and network effects in a computationally tractable manner. Researchers can specify assumptions about how individuals make decisions, how they interact with others, and how these interactions are structured by social networks, and then observe the emergent patterns that arise from these micro-level specifications.
+
+However, despite their theoretical appeal and growing popularity, ABMs in social science face a critical limitation that threatens their scientific validity and policy relevance: the lack of robust empirical validation frameworks. Too often, ABM research proceeds by constructing elaborate computational models based on theoretical assumptions, running simulations to generate predictions, and then comparing these predictions to stylized facts or aggregate-level patterns without rigorous statistical testing \citep{windrum2007empirical, fagiolo2019validation}. This approach, while useful for exploring theoretical possibilities, falls short of the empirical standards required for scientific inference and evidence-based policy recommendations.
+
+\section{The Empirical Validation Gap in Agent-Based Modeling}
+
+The empirical validation challenge in ABM research manifests in several interconnected ways. First, many ABM studies rely on parameter values that are chosen arbitrarily or based on rough calibration to aggregate outcomes, rather than being estimated from individual-level data using rigorous statistical methods \citep{grazzini2012analysis}. This approach makes it difficult to assess whether the simulated processes reflect actual social mechanisms or are merely convenient mathematical constructions that happen to reproduce observed patterns.
+
+Second, most ABM research lacks systematic uncertainty quantification, making it impossible to construct confidence intervals around simulation results or conduct formal hypothesis tests \citep{lorscheid2012opening}. Without these statistical foundations, ABM findings cannot be properly evaluated according to standard scientific criteria for evidence and inference.
+
+Third, the temporal dynamics of ABM simulations are often disconnected from the time scales and processes observed in real-world longitudinal data. ABMs typically operate in discrete time steps with arbitrary time units, while real social processes unfold in continuous time with measurable durations and rates. This disconnect makes it challenging to use longitudinal data to validate ABM assumptions or to make predictions about real-world intervention effects.
+
+These limitations are particularly problematic when ABMs are used to inform policy decisions or design social interventions. Policymakers need evidence-based guidance about which interventions are likely to succeed, under what conditions, and with what degree of confidence. Current ABM research often cannot provide this type of rigorous guidance because the models lack proper empirical grounding and statistical validation.
+
+\section{Stochastic Actor-Oriented Models: A Complementary Approach}
+
+In parallel with the development of ABM methodology, social network analysis has produced its own sophisticated approach to modeling the co-evolution of social networks and individual behaviors: Stochastic Actor-Oriented Models (SAOMs) \citep{snijders2001statistical, snijders2010introduction}. SAOMs, as implemented in the RSiena software package \citep{ripley2021manual}, provide a rigorous statistical framework for analyzing longitudinal network data and making inferences about the micro-mechanisms that drive network-behavior co-evolution.
+
+The SAOM approach offers several methodological advantages that complement ABM capabilities. First, SAOMs are specifically designed to handle longitudinal network data and can estimate parameters that describe the rates and directions of change in both network structure and individual attributes. Second, SAOMs provide standard statistical inference procedures, including significance tests, confidence intervals, and model comparison measures. Third, SAOMs handle missing data and measurement error in systematic ways that preserve the validity of statistical inference.
+
+However, SAOMs also have limitations that restrict their applicability for certain research questions. SAOMs are primarily designed for statistical inference about observed processes rather than for exploring counterfactual scenarios or designing interventions. The mathematical complexity of SAOM estimation procedures makes it difficult to incorporate certain types of behavioral mechanisms or to model large-scale networks with many nodes. Additionally, SAOMs assume that networks evolve according to specific types of stochastic processes that may not capture all relevant social mechanisms.
+
+\section{Research Motivation: Bridging ABM and SAOM Approaches}
+
+This dissertation is motivated by the recognition that ABMs and SAOMs offer complementary strengths that, when properly integrated, can address the limitations of each approach while preserving their respective advantages. ABMs excel at exploring theoretical possibilities, modeling complex behavioral mechanisms, and simulating intervention scenarios, while SAOMs provide rigorous statistical inference, empirical parameter estimation, and uncertainty quantification. An integration framework that combines these capabilities could represent a significant methodological advance for computational social science.
+
+The specific research context that motivates this integration effort concerns the design and evaluation of tolerance-based interventions aimed at improving interethnic relations in educational settings. This application domain presents several characteristics that make it ideal for demonstrating the value of ABM-SAOM integration:
+
+First, the phenomenon involves the co-evolution of social networks (friendship and cooperation relationships) and individual attitudes (tolerance and prejudice), which is precisely the type of process that both ABMs and SAOMs are designed to model. Second, there exists high-quality longitudinal network data from real intervention studies that can be used for empirical validation \citep{shani2023tolerance}. Third, the policy relevance of interethnic relations research creates strong incentives for developing rigorous methodological approaches that can provide evidence-based guidance for intervention design.
+
+Fourth, the theoretical mechanisms involved in tolerance diffusion and interethnic cooperation are complex enough to benefit from the flexible modeling capabilities of ABMs, while being sufficiently well-specified to support the statistical estimation procedures required for SAOMs. This combination makes the domain an excellent test case for methodological innovation.
+
+\section{Research Objectives and Questions}
+
+The primary objective of this dissertation is to develop and implement a comprehensive methodological framework that integrates Agent-Based Models with Stochastic Actor-Oriented Models for the purpose of conducting empirically-grounded studies of network-behavior co-evolution. This framework aims to address the empirical validation gap in ABM research while extending the simulation capabilities of SAOM methodology.
+
+The research is organized around four core research questions:
+
+\begin{research-question}
+\textbf{RQ1: Methodological Integration} \\
+How can Agent-Based Models and Stochastic Actor-Oriented Models be integrated to create a unified framework that combines the simulation capabilities of ABMs with the statistical rigor of SAOMs?
+\end{research-question}
+
+This question addresses the technical and conceptual challenges involved in bridging two distinct methodological traditions. It requires developing solutions for temporal reconciliation (mapping between discrete ABM time steps and continuous SAOM time), parameter translation (converting SAOM effect estimates into ABM behavioral rules), and statistical validation (using SAOM-based inference to evaluate ABM predictions).
+
+\begin{research-question}
+\textbf{RQ2: Empirical Validation Framework} \\
+What validation protocols and statistical procedures are needed to ensure that integrated ABM-SAOM models accurately represent real-world social processes and provide reliable predictions for intervention outcomes?
+\end{research-question}
+
+This question focuses on establishing rigorous standards for model validation that go beyond the informal pattern-matching approaches commonly used in ABM research. It involves developing systematic procedures for parameter estimation, goodness-of-fit assessment, sensitivity analysis, and out-of-sample prediction validation.
+
+\begin{research-question}
+\textbf{RQ3: Theoretical Application} \\
+How do tolerance-based interventions spread through social networks and affect interethnic cooperation, and what intervention design principles emerge from empirically-validated simulation studies?
+\end{research-question}
+
+This question applies the integrated methodological framework to a substantively important research problem in order to demonstrate its practical value and generate new theoretical insights. It involves developing and testing specific hypotheses about the mechanisms of tolerance diffusion and their implications for intervention effectiveness.
+
+\begin{research-question}
+\textbf{RQ4: Methodological Generalizability} \\
+To what extent can the ABM-SAOM integration framework be applied to other domains of social science research characterized by network-behavior co-evolution?
+\end{research-question}
+
+This question considers the broader implications of the methodological innovations developed in this research and assesses their potential for application to other substantive domains such as innovation diffusion, political opinion formation, and organizational change.
+
+\section{Theoretical Framework and Core Contributions}
+
+The theoretical framework underlying this research draws on several interconnected bodies of literature. From social network analysis, we adopt the perspective that social structures and individual behaviors co-evolve through mechanisms of social influence (network effects on behavior) and social selection (behavioral effects on network formation) \citep{steglich2010dynamic}. From computational social science, we embrace the principle that complex social phenomena can be understood through explicit modeling of individual-level mechanisms and their aggregation effects \citep{coleman1990foundations}.
+
+From the tolerance and intergroup relations literature, we draw on theoretical insights about the distinct roles of prejudice and principled disapproval in structuring interethnic relations, and the potential for tolerance-based interventions to promote cooperation without necessarily eliminating disapproval \citep{verkuyten2023tolerance}. From diffusion research, we incorporate theoretical frameworks about simple versus complex contagion and the importance of network structure for intervention success \citep{centola2010spread}.
+
+The integration of these theoretical perspectives through the ABM-SAOM methodological framework enables several types of contributions:
+
+\textbf{Methodological Contributions:}
+\begin{itemize}
+\item A novel temporal reconciliation framework that enables seamless integration of discrete-time ABM simulations with continuous-time SAOM estimation procedures
+\item A comprehensive empirical validation protocol that uses real-world longitudinal network data to calibrate ABM parameters and validate simulation predictions
+\item Advanced statistical techniques for uncertainty quantification in ABM outputs, including confidence interval construction and hypothesis testing procedures
+\item Open-source software implementation that makes the integrated framework accessible to the broader research community
+\end{itemize}
+
+\textbf{Theoretical Contributions:}
+\begin{itemize}
+\item Empirical validation of theoretical mechanisms governing tolerance diffusion in social networks, including tests of attraction-repulsion versus assimilation models of social influence
+\item Identification of network structural conditions that promote or inhibit the spread of tolerance-based interventions
+\item Evidence about the relationship between tolerance and interethnic cooperation, including the mediating role of trust and social norms
+\item Insights about optimal intervention design strategies based on network position, timing, and targeting criteria
+\end{itemize}
+
+\textbf{Substantive Contributions:}
+\begin{itemize}
+\item Evidence-based guidance for designing tolerance interventions in educational settings
+\item Identification of conditions under which such interventions are likely to succeed or fail
+\item Assessment of the long-term sustainability of intervention effects in real social networks
+\item Implications for broader efforts to promote interethnic cooperation in diverse societies
+\end{itemize}
+
+\section{Research Design and Methodology Overview}
+
+The research design for this dissertation follows a multi-stage approach that progressively builds from methodological development through empirical application to validation and generalization. The overall strategy can be characterized as methodological innovation guided by substantive application.
+
+\textbf{Stage 1: Methodological Development} \\
+The first stage focuses on developing the technical infrastructure required for ABM-SAOM integration. This includes designing algorithms for temporal reconciliation, implementing parameter translation procedures, and creating software tools that can handle the computational demands of large-scale network simulations with statistical validation.
+
+\textbf{Stage 2: Theoretical Specification} \\
+The second stage involves translating theoretical insights about tolerance diffusion and interethnic cooperation into formal model specifications that can be implemented within the integrated framework. This requires careful attention to ensuring that theoretical mechanisms are specified in ways that support both statistical estimation and computational simulation.
+
+\textbf{Stage 3: Empirical Calibration} \\
+The third stage uses longitudinal network data from German high schools to estimate parameters for the theoretical model and validate its ability to reproduce observed patterns of network-behavior co-evolution. This stage establishes the empirical foundation that enables the simulation studies in subsequent stages.
+
+\textbf{Stage 4: Intervention Simulation} \\
+The fourth stage uses the calibrated and validated model to conduct systematic simulation studies of different intervention designs. This stage explores counterfactual scenarios that would be impossible or unethical to implement in real-world experiments, providing insights about optimal intervention strategies.
+
+\textbf{Stage 5: Validation and Generalization} \\
+The final stage assesses the robustness of findings through sensitivity analysis, out-of-sample validation, and exploration of generalizability to other contexts and domains.
+
+\section{Data Sources and Empirical Context}
+
+The empirical analysis in this dissertation is based on longitudinal network data collected as part of a follow-up study to the tolerance intervention research conducted by \citet{shani2023tolerance} in German high schools. The dataset includes information about 2,585 students across 105 classrooms in 3 schools, with data collected at three time points over the course of one academic year.
+
+The dataset includes several types of variables that are essential for studying network-behavior co-evolution:
+
+\textbf{Network Variables:} Friendship nominations, cooperation partnerships, and negative relationship indicators collected through peer nomination procedures. These variables capture the evolving social structure within each classroom and enable analysis of selection effects.
+
+\textbf{Attitude Variables:} Measures of tolerance toward ethnic outgroups, prejudice levels, and related attitudinal constructs collected through validated survey instruments. These variables enable analysis of influence effects and intervention impacts.
+
+\textbf{Individual Characteristics:} Demographic information, academic performance measures, and personality characteristics that serve as control variables and help identify mechanisms of attitude change.
+
+\textbf{Contextual Variables:} Classroom-level and school-level characteristics that may moderate the effectiveness of network-level processes.
+
+The longitudinal nature of the data, combined with its detailed measurement of both network and behavioral variables, makes it exceptionally well-suited for the type of integrated analysis proposed in this research. The original intervention study provides a natural experiment context for testing theoretical predictions about tolerance diffusion, while the follow-up data collection enables assessment of longer-term effects.
+
+\section{Expected Contributions and Implications}
+
+This research is expected to make several important contributions to the field of computational social science and to the specific literature on interethnic relations. From a methodological perspective, the ABM-SAOM integration framework addresses a long-standing limitation in agent-based modeling research by providing rigorous empirical validation procedures. This contribution has implications that extend far beyond the specific application domain examined in this study.
+
+The framework provides a general template for conducting empirically-grounded ABM research in any domain characterized by network-behavior co-evolution. This includes research on innovation diffusion, political opinion formation, organizational change, health behavior adoption, and many other substantive areas. By establishing higher standards for empirical validation in ABM research, this work contributes to the broader goal of making computational social science more rigorous and policy-relevant.
+
+From a theoretical perspective, the research provides new insights about the mechanisms governing tolerance diffusion and their implications for intervention design. These insights contribute to our understanding of how social psychological processes operate within network contexts and how interventions can be designed to leverage network effects for maximum impact.
+
+The empirical findings about optimal intervention strategies have direct practical implications for educators, policymakers, and practitioners working to improve interethnic relations in educational settings. The evidence-based guidance provided by this research can inform decisions about resource allocation, targeting strategies, and implementation approaches.
+
+\section{Dissertation Structure and Chapter Overview}
+
+This dissertation is organized into seven chapters that progress logically from literature review through methodological development to empirical analysis and conclusions. Each chapter builds on the previous work while making distinct contributions to the overall research program.
+
+\textbf{Chapter 2: Literature Review and Theoretical Foundation} provides a comprehensive review of the relevant literature on agent-based modeling, social network analysis, tolerance and intergroup relations, and empirical validation in computational social science. This chapter establishes the theoretical foundation for the research and identifies the specific gaps that the dissertation aims to address.
+
+\textbf{Chapter 3: Methodology and Theoretical Framework} presents the integrated theoretical framework that guides the empirical analysis. This chapter specifies the theoretical mechanisms governing tolerance diffusion and interethnic cooperation, translates these mechanisms into formal model specifications, and develops hypotheses for empirical testing.
+
+\textbf{Chapter 4: Implementation and Technical Architecture} describes the technical details of the ABM-SAOM integration framework. This chapter covers the algorithms for temporal reconciliation, parameter translation procedures, software implementation, and computational optimization strategies that enable large-scale network simulations.
+
+\textbf{Chapter 5: Empirical Analysis and Validation} presents the empirical analysis using the German high school data. This chapter includes parameter estimation results, model validation assessments, and empirical tests of theoretical hypotheses about tolerance diffusion mechanisms.
+
+\textbf{Chapter 6: Discussion and Interpretation} discusses the implications of the empirical findings for theory, methodology, and practice. This chapter also addresses limitations of the current research and identifies areas where additional work is needed.
+
+\textbf{Chapter 7: Conclusion and Future Directions} summarizes the key contributions of the research and outlines directions for future work. This chapter also discusses the broader implications of the methodological innovations for computational social science research.
+
+\section{Conclusion}
+
+The research presented in this dissertation represents an ambitious attempt to address fundamental methodological challenges in computational social science while generating new theoretical insights about an important substantive problem. By integrating Agent-Based Models with Stochastic Actor-Oriented Models, this work aims to establish new standards for empirical validation in ABM research while extending the simulation capabilities of network analysis methodology.
+
+The focus on tolerance-based interventions provides a compelling application domain that demonstrates the practical value of methodological innovation for addressing real-world social challenges. The evidence-based guidance generated by this research has the potential to inform more effective approaches to promoting interethnic cooperation in educational settings and beyond.
+
+More broadly, this research contributes to the ongoing effort to establish computational social science as a mature scientific discipline with rigorous methodological standards and strong connections to policy and practice. By demonstrating how advanced computational methods can be combined with high-quality empirical data to generate actionable insights, this work advances the goal of making social science more predictive, more precise, and more useful for addressing the complex social challenges of the 21st century.

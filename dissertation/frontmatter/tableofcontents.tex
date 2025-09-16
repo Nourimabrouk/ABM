@@ -1,0 +1,81 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table of Contents, List of Figures, and List of Tables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Table of Contents
+\tableofcontents
+\cleardoublepage
+
+% List of Figures
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+\cleardoublepage
+
+% List of Tables
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
+\cleardoublepage
+
+% List of Algorithms (if needed)
+\listofalgorithms
+\addcontentsline{toc}{chapter}{List of Algorithms}
+\cleardoublepage
+
+% List of Abbreviations and Acronyms
+\chapter*{List of Abbreviations and Acronyms}
+\addcontentsline{toc}{chapter}{List of Abbreviations and Acronyms}
+
+\begin{description}[style=nextline,leftmargin=3cm,labelsep=1em]
+\item[ABM] Agent-Based Model
+\item[AIC] Akaike Information Criterion
+\item[ANOVA] Analysis of Variance
+\item[API] Application Programming Interface
+\item[BIC] Bayesian Information Criterion
+\item[CI] Confidence Interval
+\item[CPU] Central Processing Unit
+\item[FDR] False Discovery Rate
+\item[ERGM] Exponential Random Graph Model
+\item[MCMC] Markov Chain Monte Carlo
+\item[ML] Maximum Likelihood
+\item[OLS] Ordinary Least Squares
+\item[RAM] Random Access Memory
+\item[RMSE] Root Mean Square Error
+\item[RSiena] R package for Simulation Investigation for Empirical Network Analysis
+\item[SAOM] Stochastic Actor-Oriented Model
+\item[SNA] Social Network Analysis
+\item[STERGM] Separable Temporal Exponential Random Graph Model
+\item[UI] User Interface
+\item[XML] eXtensible Markup Language
+\end{description}
+
+\cleardoublepage
+
+% Mathematical Notation
+\chapter*{Mathematical Notation}
+\addcontentsline{toc}{chapter}{Mathematical Notation}
+
+\begin{description}[style=nextline,leftmargin=3cm,labelsep=1em]
+\item[$\agents$] Set of all agents in the model
+\item[$\agent{i}$] Individual agent $i$
+\item[$\network{G}$] Social network represented as a graph
+\item[$\adjmatrix{X}$] Adjacency matrix of the network
+\item[$\parameters$] Vector of model parameters
+\item[$\parameter{\theta}$] Individual parameter $\theta$
+\item[$\estimate{\theta}$] Estimated value of parameter $\theta$
+\item[$\prob{A}$] Probability of event $A$
+\item[$\expect{X}$] Expected value of random variable $X$
+\item[$\var{X}$] Variance of random variable $X$
+\item[$\cov{X,Y}$] Covariance between variables $X$ and $Y$
+\item[$\likelihood{\theta}$] Likelihood function for parameters $\theta$
+\item[$\loglik{\theta}$] Log-likelihood function for parameters $\theta$
+\item[$\posterior{\theta}$] Posterior distribution of parameters $\theta$
+\item[$\timestep{t}$] Time step $t$ in discrete time models
+\item[$\timeinterval{s}{t}$] Time interval from $s$ to $t$ in continuous time models
+\item[$\indicator{A}$] Indicator function that equals 1 if condition $A$ is true, 0 otherwise
+\item[$\sigmoid{x}$] Sigmoid function $\frac{1}{1+e^{-x}}$
+\item[$\degree{i}$] Degree centrality of node $i$
+\item[$\clustering{i}$] Clustering coefficient of node $i$
+\item[$\centrality{measure}{i}$] Centrality measure for node $i$
+\end{description}
+
+\cleardoublepage

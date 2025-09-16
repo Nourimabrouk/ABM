@@ -1,0 +1,81 @@
+Project Overview
+This project will use an Agent-Based Model (ABM), specifically a Stochastic Actor-Oriented Model (SAOM), to explore the effectiveness of a social norm intervention designed to promote interethnic cooperation among adolescents. Moving beyond traditional prejudice-reduction strategies, this research focuses on how an intervention promoting 
+
+tolerance can spread through a school's social network structure and lead to positive changes in cooperative behavior. The ultimate goal is to use simulation as a "forecasting tool" to identify the design principles of an effective, network-aware intervention.
+
+
+
+
+Methodology
+The research will be conducted within the 
+
+R (rsiena) framework.
+
+Data: The model will be built upon a school-bounded, longitudinal dataset from a follow-up to the Shani et al. (2023) study. This includes data on 2585 students nested in 3 schools over 3 waves. The analysis will focus on 3 large, school-level network models.
+
+
+Co-evolutionary Model: The SAOM will model the simultaneous co-evolution of three dependent variables:
+
+A friendship network (one-mode).
+
+A cooperation network (one-mode).
+
+Agent tolerance levels (a continuous attitude).
+
+Model Specification: The model will include the following key effects:
+
+
+Structural Controls: For both the friendship and cooperation networks, the model will control for fundamental network tendencies, including density, reciprocity, and transitivity.
+
+
+Attribute Controls: To account for the powerful structuring effect of classrooms within the schools, a sameX homophily effect for class membership will be included in the friendship evolution model.
+
+
+Social Influence Mechanism: The spread of tolerance will be modeled using the attraction-repulsion mechanism developed by Tang, Snijders, and Flache (2025). To ensure this mechanism operates only between friends, as the theory requires, it will be implemented using the 
+
+
+includeInteraction function to make the effect conditional on the existence of a friendship tie.
+
+Social Selection Mechanism: The central hypothesis—that increased tolerance promotes interethnic cooperation—will be tested via an interaction effect. This effect will model whether an agent’s tolerance score specifically increases their probability of forming a 
+
+cooperation tie with a student of a different ethnicity.
+
+Experimental Design & Validation
+
+Intervention Design: The intervention will be simulated as a one-time "shock" that instantly increases the tolerance scores of a targeted subset of students immediately after Wave 1.
+
+
+Targeting Strategy: The intervention will target "social referents," who will be operationally defined as the students with the highest in-degree (i.e., popularity) in the friendship network.
+
+
+Experimental Variable: The magnitude of the tolerance shock will be systematically varied to determine the minimum change required to produce a meaningful effect on network-wide cooperation.
+
+Simulation Plan: The experiments will be conducted as counterfactual analyses. The model, parameterized with the empirically estimated effects, will be simulated forward from Wave 1 to Wave 3 to compare the intervention scenarios against the observed baseline reality.
+
+
+Validation Plan: Before its use in experiments, the baseline model's validity will be rigorously assessed using the sienaGOF function. The model will be required to reproduce key network features not explicitly specified in the model, such as the observed 
+
+
+
+
+degree distributions, geodesic distances, and triad census.
+
+
+
+
+Workflow & Contribution
+Workflow: To ensure efficiency and robust reproducibility for this computationally intensive project, the entire analysis pipeline will be managed using the {targets} package in R.
+
+
+Contribution: This research is poised to make a dual contribution: substantively, by providing evidence-based insights into the design of effective interventions for interethnic cohesion, and 
+
+methodologically, by demonstrating a sophisticated application of co-evolutionary network models to test complex social theory.
+
+
+Sources
+
+
+
+
+
+

@@ -1,0 +1,123 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document Formatting Configuration
+% Professional PhD Dissertation Standards
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Page style and headers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\renewcommand{\headrulewidth}{0.3pt}
+
+% Chapter and section formatting
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+
+% Hyperlink formatting
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=black,
+    urlcolor=blue,
+    citecolor=black,
+    pdftitle={Agent-Based Models for Statistical Sociology},
+    pdfauthor={Jan-Willem Simons},
+    pdfsubject={PhD Dissertation - Computational Social Science},
+    pdfkeywords={Agent-Based Models, Social Networks, RSiena, Statistical Sociology}
+}
+
+% Caption formatting
+\captionsetup{
+    font=small,
+    labelfont=bf,
+    format=hang,
+    justification=justified,
+    singlelinecheck=false
+}
+
+% Figure and table spacing
+\setlength{\intextsep}{12pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{20pt plus 2pt minus 4pt}
+
+% List formatting
+\setlist{nosep}
+\setlist[itemize]{leftmargin=*}
+\setlist[enumerate]{leftmargin=*}
+
+% Code listing style
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{codeblue}\bfseries,
+    commentstyle=\color{codegreen}\itshape,
+    stringstyle=\color{red},
+    numberstyle=\tiny\color{codegray},
+    numbers=left,
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{gray!5},
+    frame=single,
+    frameround=tttt,
+    framesep=3pt,
+    framexleftmargin=3pt,
+    tabsize=2,
+    showstringspaces=false,
+    breaklines=true,
+    breakatwhitespace=false,
+    aboveskip=10pt,
+    belowskip=10pt
+}
+
+% Mathematical theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[chapter]
+\newtheorem{example}{Example}[chapter]
+
+% Algorithm formatting
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+% Bibliography formatting
+\setlength{\bibitemsep}{0.5\baselineskip}
+\setlength{\bibhang}{2em}
+
+% Table of contents formatting
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{3}
+
+% Paragraph formatting
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0pt plus 1pt}
+
+% Line spacing adjustments
+\renewcommand{\baselinestretch}{1.5}
+
+% Chapter title formatting
+\makeatletter
+\def\@makechapterhead#1{%
+  \vspace*{50\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \huge\bfseries \@chapapp\space \thechapter
+        \par\nobreak
+        \vskip 20\p@
+    \fi
+    \interlinepenalty\@M
+    \Huge \bfseries #1\par\nobreak
+    \vskip 40\p@
+  }}
+\makeatother
+
+% Section title spacing
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{2.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{2.25ex plus 1ex minus .2ex}{1ex plus .2ex}
+\titlespacing*{\subsubsection}{0pt}{1.5ex plus 1ex minus .2ex}{0.75ex plus .2ex}

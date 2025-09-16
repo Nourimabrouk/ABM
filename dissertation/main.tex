@@ -1,0 +1,73 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PhD Dissertation: Agent-Based Models for Statistical Sociology
+% Author: Jan-Willem Simons
+% Supervisors: Frank & Eef
+% Institution: Utrecht University, Department of Sociology
+%
+% ABM-RSiena Integration for Network-Behavior Co-evolution Analysis
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt,a4paper,twoside,openright]{book}
+
+% Include all package configurations and formatting
+\input{preamble/packages}
+\input{preamble/formatting}
+\input{preamble/macros}
+
+% Document metadata
+\title{Designing Social Norm Interventions to Promote \\
+       Interethnic Cooperation through Tolerance: \\
+       An Agent-Based Modeling Approach}
+
+\author{Jan-Willem Simons}
+
+\date{\today}
+
+% Bibliography setup
+\addbibresource{bibliography/references.bib}
+
+\begin{document}
+
+% Front matter
+\frontmatter
+\input{frontmatter/titlepage}
+\input{frontmatter/abstract}
+\input{frontmatter/acknowledgments}
+\input{frontmatter/tableofcontents}
+
+% Main content
+\mainmatter
+
+% Chapter 1: Introduction
+\input{chapters/01_introduction}
+
+% Chapter 2: Literature Review
+\input{chapters/02_literature}
+
+% Chapter 3: Theoretical Framework
+\input{chapters/03_theory}
+
+% Chapter 4: Methodology
+\input{chapters/04_methodology}
+
+% Chapter 5: Analysis
+\input{chapters/05_analysis}
+
+% Chapter 6: Results
+\input{chapters/06_results}
+
+% Chapter 7: Discussion
+\input{chapters/07_discussion}
+
+% Chapter 8: Conclusion
+\input{chapters/08_conclusion}
+
+% Back matter
+\appendix
+\input{appendices/technical_appendix}
+\input{appendices/supplementary_results}
+
+% Bibliography
+\printbibliography[heading=bibintoc]
+
+\end{document}

@@ -1,0 +1,48 @@
+Official RSiena Resources and Documentation
+The Official RSiena Manual
+Direct link: https://www.stats.ox.ac.uk/~snijders/siena/RSiena_Manual.pdf
+This is the comprehensive manual (600+ pages) maintained by Tom Snijders, Ruth Ripley, Zsófia Boda, András Vörös, and Paulina Preciado. It's updated regularly with each new version of RSiena.
+Key SIENA/RSiena Resources from Tom Snijders' Oxford Page
+Main SIENA Homepage:
+https://www.stats.ox.ac.uk/~snijders/siena/
+Downloads Page (includes latest versions):
+https://www.stats.ox.ac.uk/~snijders/siena/siena_downloads.htm
+Basic RSiena Tutorial:
+https://www.stats.ox.ac.uk/~snijders/siena/basicRSiena.html
+Publications about SIENA:
+https://www.stats.ox.ac.uk/~snijders/siena/siena_articles.htm
+Data Sets for Practice:
+https://www.stats.ox.ac.uk/~snijders/siena/s50_data.zip
+(Classic 50-actor friendship network used in tutorials)
+GitHub Repositories (More Recent than CRAN)
+Official RSiena GitHub:
+https://github.com/stocnet/rsiena
+(Usually 3-6 months ahead of CRAN releases)
+RSienaTest (Experimental Features):
+Available through R-Forge, includes features still in testing phase
+Important Version Notes
+
+CRAN version (as of February 2024): RSiena 1.4.7
+GitHub version: More recent, compile from source for latest features
+Manual version: Updated with each release but check the date on page 1
+
+Additional Essential Documentation
+Snijders' Personal Publications Page:
+https://www.stats.ox.ac.uk/~snijders/publ.htm
+(Contains working papers and presentations not published elsewhere)
+Multilevel Book Website:
+https://www.stats.ox.ac.uk/~snijders/mlbook.htm
+(Snijders & Bosker's multilevel analysis book - foundational for understanding random coefficient models in multiSiena)
+Workshop Materials:
+
+Advanced Workshop 2024: https://www.stats.ox.ac.uk/~snijders/siena/Workshop_Advanced_2024.htm
+Sunbelt 2024 multiSiena: https://www.stats.ox.ac.uk/~snijders/siena/Workshop_Sunbelt2024_A.htm
+
+Pro Tips for Using the Manual
+
+Chapter 11 (Multilevel Analysis) is essential for polarization research across multiple groups
+Section 11.3 on sienaBayes contains information not available anywhere else
+Chapter 12 (Effects) provides mathematical definitions often missing from papers
+Appendix B lists all convergence diagnostics and their interpretation
+The manual is searchable but poorly indexed - use Ctrl+F liberally
+

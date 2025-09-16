@@ -1,0 +1,353 @@
+GitHub Repository Structure for RSiena/ABM Polarization Research
+Essential Repository Architecture
+your-polarization-study/
+├── README.md                    # Overview with badges for reproducibility
+├── LICENSE                      # MIT or GPL-3 for academic work
+├── CITATION.cff                 # Machine-readable citation format
+├── .zenodo.json                 # For DOI assignment
+├── requirements.txt             # R package versions
+├── renv.lock                    # R environment snapshot
+│
+├── /data
+│   ├── /raw                    # Original, untouched data
+│   │   ├── README_raw.md       # Data collection details
+│   │   └── codebook.xlsx       # Variable definitions
+│   ├── /processed              # Cleaned, RSiena-ready data
+│   │   ├── prepare_data.R      # Cleaning script
+│   │   └── diagnostics.html    # Data quality report
+│   └── /simulated             # ABM-generated synthetic data
+│       └── validation_data.R   # Generate test cases
+│
+├── /code
+│   ├── /00_setup              # Environment configuration
+│   │   ├── install_packages.R
+│   │   └── check_convergence_functions.R
+│   ├── /01_descriptive        # Network visualization
+│   │   ├── plot_networks.R
+│   │   └── polarization_measures.R
+│   ├── /02_models             # SAOM specifications
+│   │   ├── null_model.R
+│   │   ├── selection_model.R
+│   │   ├── influence_model.R
+│   │   ├── coevolution_model.R
+│   │   └── negative_influence_model.R
+│   ├── /03_goodness_of_fit    # Model validation
+│   │   ├── gof_analysis.R
+│   │   └── time_heterogeneity.R
+│   ├── /04_simulation         # ABM components
+│   │   ├── abm_from_saom.R   # Generate ABM from SAOM estimates
+│   │   ├── opinion_dynamics.R
+│   │   └── counterfactuals.R
+│   └── /05_robustness        # Sensitivity analysis
+│       ├── missing_data_scenarios.R
+│       ├── specification_curve.R
+│       └── bootstrap_networks.R
+│
+├── /results
+│   ├── /tables               # LaTeX-ready tables
+│   ├── /figures              # Publication-quality plots
+│   ├── /logs                 # Convergence diagnostics
+│   └── /intermediate         # Checkpoint saves
+│
+├── /manuscripts
+│   ├── paper.Rmd            # Main manuscript
+│   ├── appendix.Rmd         # Technical appendix
+│   └── /reviews             # Response to reviewers
+│
+└── /docker
+    ├── Dockerfile           # Reproducible environment
+    └── docker-compose.yml   # Multi-container setup
+Core Templates for Polarization Research
+1. Master Analysis Pipeline (run_all.R)
+r# Master script for complete reproduction
+# Expected runtime: ~48 hours on 8-core machine
+
+source("code/00_setup/install_packages.R")
+renv::restore()  # Restore exact package versions
+
+# Set global parameters
+WAVES <- 3
+N_ACTORS <- 50
+N_SIMULATIONS <- 10000
+PARALLEL_CORES <- 7
+
+# Run analysis pipeline
+source("code/01_descriptive/plot_networks.R")
+source("code/02_models/null_model.R")
+source("code/02_models/coevolution_model.R")
+source("code/03_goodness_of_fit/gof_analysis.R")
+source("code/04_simulation/counterfactuals.R")
+
+# Generate manuscript
+rmarkdown::render("manuscripts/paper.Rmd")
+2. Polarization-Specific Effects Template
+r# templates/polarization_effects.R
+# Standard effect specifications for opinion dynamics
+
+get_polarization_effects <- function(myeff, model_type = "full") {
+  
+  # Structural effects (always included)
+  myeff <- includeEffects(myeff, 
+    density, recip, transTrip, cycle3,
+    name = "friendship")
+  
+  # Selection effects (homophily)
+  myeff <- includeEffects(myeff,
+    simX, interaction1 = "opinion",
+    name = "friendship")
+  
+  # Influence effects
+  myeff <- includeEffects(myeff,
+    avSim, name = "opinion",
+    interaction1 = "friendship")
+  
+  if (model_type == "bounded_confidence") {
+    # Add threshold effects
+    myeff <- includeInteraction(myeff,
+      simX, egoX, interaction1 = c("opinion", "opinion"))
+  }
+  
+  if (model_type == "negative_influence") {
+    # Add repulsion effects
+    myeff <- includeEffects(myeff,
+      avSimInDist2, name = "opinion")
+  }
+  
+  return(myeff)
+}
+3. Convergence Diagnostic Suite
+r# templates/convergence_check.R
+check_convergence_comprehensive <- function(ans) {
+  
+  # Basic convergence
+  conv_basic <- ans$tconv.max < 0.25
+  
+  # Parameter stability
+  conv_stable <- all(abs(ans$tstat) < 0.1)
+  
+  # Autocorrelation check
+  conv_auto <- max(ans$ac) < 0.4
+  
+  # Generate diagnostic plot
+  p <- plot_convergence_diagnostics(ans)
+  
+  # Save detailed log
+  save_convergence_log(ans, 
+    file = paste0("results/logs/conv_", Sys.Date(), ".txt"))
+  
+  return(list(
+    converged = conv_basic & conv_stable & conv_auto,
+    diagnostics = extract_diagnostics(ans),
+    plot = p
+  ))
+}
+High-Quality Pattern Examples
+4. Multiverse Analysis for Robustness
+r# templates/multiverse_analysis.R
+run_multiverse <- function(data, specifications) {
+  
+  results <- expand.grid(specifications) %>%
+    mutate(model_id = row_number()) %>%
+    rowwise() %>%
+    mutate(
+      model = list(run_single_model(data, cur_data())),
+      converged = model$converged,
+      estimates = list(extract_estimates(model))
+    )
+  
+  # Specification curve plot
+  plot_specification_curve(results)
+  
+  # Vibration of effects
+  calculate_vibration_ratio(results)
+  
+  return(results)
+}
+5. ABM-SAOM Integration
+r# templates/abm_from_saom.R
+generate_abm_from_saom <- function(saom_fit, n_periods = 100) {
+  
+  # Extract micro-rules from SAOM
+  theta <- saom_fit$theta
+  effects <- get_effect_functions(saom_fit)
+  
+  # Initialize ABM
+  abm <- create_abm_world(
+    n_actors = nrow(saom_fit$data[[1]]),
+    network = saom_fit$data[[1]][,,1],
+    opinions = saom_fit$behavior[,1]
+  )
+  
+  # Run forward simulation
+  for (t in 1:n_periods) {
+    # Actor selection (rate function)
+    actor <- sample_actor(abm, theta[1:2])
+    
+    # Choice evaluation (objective function)
+    choice <- evaluate_choices(actor, abm, effects, theta[3:length(theta)])
+    
+    # Update
+    abm <- update_abm(abm, actor, choice)
+    
+    # Store trajectory
+    if (t %% 10 == 0) {
+      save_snapshot(abm, t)
+    }
+  }
+  
+  return(abm)
+}
+Documentation Standards
+6. README Template for Reproducibility
+markdown# [Paper Title]: Reproducible Analysis
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXX)
+[![R Version](https://img.shields.io/badge/R-4.3.0-blue)](https://www.r-project.org/)
+[![RSiena](https://img.shields.io/badge/RSiena-1.4.7-green)](https://github.com/stocnet/rsiena)
+
+## Quick Start
+```bash
+git clone https://github.com/yourusername/polarization-saom
+cd polarization-saom
+Rscript code/00_setup/install_packages.R
+Rscript run_all.R
+Reproduction Time
+ComponentTimeRAMCoresData prep5 min2GB1Main models24 hrs8GB8GOF tests12 hrs4GB4Simulations6 hrs16GB8
+Key Findings Reproduction
+To reproduce Figure 3 (main polarization result):
+rsource("code/02_models/coevolution_model.R")
+source("code/figures/figure3_polarization.R")
+
+### **Critical Components Often Missing**
+
+#### **7. Session Info Preservation**
+```r
+# templates/session_management.R
+save_session_info <- function() {
+  info <- list(
+    session = sessionInfo(),
+    rsiena_version = packageVersion("RSiena"),
+    seed = .Random.seed,
+    timestamp = Sys.time(),
+    system = Sys.info()
+  )
+  
+  saveRDS(info, paste0("results/session_", 
+    format(Sys.time(), "%Y%m%d_%H%M%S"), ".rds"))
+}
+8. Failure Recovery System
+r# templates/checkpoint_system.R
+with_checkpoints <- function(model_fun, checkpoint_dir) {
+  
+  checkpoint_file <- file.path(checkpoint_dir, "checkpoint.rds")
+  
+  if (file.exists(checkpoint_file)) {
+    message("Resuming from checkpoint...")
+    state <- readRDS(checkpoint_file)
+    start_from <- state$iteration
+  } else {
+    start_from <- 1
+  }
+  
+  # Run with periodic saves
+  for (i in start_from:N_ITERATIONS) {
+    result <- model_fun(i)
+    
+    if (i %% 100 == 0) {
+      saveRDS(list(iteration = i, result = result), 
+              checkpoint_file)
+    }
+  }
+}
+Examples of Excellence
+High-Quality Repositories to Emulate:
+
+Stadtfeld's DyNAM Examples: https://github.com/stocnet/goldfish-example
+ERGM Tutorial Repository: https://github.com/statnet/ergm-tutorials
+Network Evolution: https://github.com/snlab-ch/goldfish-example
+
+Polarization-Specific Additions
+9. Opinion Dynamics Metrics
+r# templates/polarization_metrics.R
+calculate_polarization_suite <- function(opinions, network = NULL) {
+  
+  metrics <- list(
+    # Distribution-based
+    variance = var(opinions),
+    bimodality = calculate_bimodality_coefficient(opinions),
+    
+    # Network-aware (if network provided)
+    homophily = calculate_network_homophily(opinions, network),
+    echo_chambers = detect_echo_chambers(opinions, network),
+    
+    # Dynamics
+    opinion_volatility = calculate_volatility(opinions),
+    convergence_rate = estimate_convergence_rate(opinions)
+  )
+  
+  return(metrics)
+}
+10. Negative Influence Detection
+r# templates/negative_influence_tests.R
+test_negative_influence <- function(data, waves) {
+  
+  # Estimate models with increasing complexity
+  models <- list(
+    baseline = estimate_baseline_model(data),
+    homophily = estimate_homophily_model(data),
+    positive_influence = estimate_positive_influence(data),
+    negative_influence = estimate_negative_influence(data)
+  )
+  
+  # Model comparison
+  comparison <- compare_models(models)
+  
+  # Simulation-based test
+  sim_test <- simulate_negative_influence_test(
+    models$negative_influence, 
+    n_sims = 1000
+  )
+  
+  return(list(models = models, 
+              comparison = comparison,
+              simulation_test = sim_test))
+}
+GitHub Actions for Continuous Integration
+yaml# .github/workflows/reproduce.yml
+name: Reproduce Analysis
+
+on: [push, pull_request]
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - uses: r-lib/actions/setup-r@v2
+      with:
+        r-version: '4.3.0'
+    
+    - name: Install RSiena
+      run: |
+        Rscript -e "install.packages('RSiena')"
+        
+    - name: Run basic models
+      run: |
+        Rscript code/02_models/null_model.R
+        
+    - name: Check convergence
+      run: |
+        Rscript tests/test_convergence.R
+Final Recommendations
+
+Use renv for perfect R package version control
+Include raw convergence output - many papers hide non-convergence
+Provide intermediate results - 24-hour analyses shouldn't need full rerun
+Document failures - which models didn't converge and why
+Version your data - use git-lfs for large files
+Create tutorials - Jupyter notebooks or R Markdown vignettes
+Pre-compute expensive operations - save MCMC chains
+Include negative results - models that didn't work are valuable
+
+This structure ensures your work is not just reproducible but also extensible by other researchers, setting a new standard for computational sociology research.Retry

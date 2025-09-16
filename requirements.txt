@@ -1,0 +1,189 @@
+# =================================================================
+# COMPREHENSIVE REQUIREMENTS FOR ABM + RSIENA + DATA SCIENCE
+# Python packages to support R-first development workflow
+# =================================================================
+
+# Core ABM Framework
+mesa>=2.2.4
+mesa-geo>=0.8.0  # For spatial ABMs with geographic data
+networkx>=3.2.1
+numpy>=1.24.3
+pandas>=2.0.3
+scipy>=1.11.1
+numba>=0.57.1  # JIT compilation for performance
+
+# R Integration (Primary workflow)
+rpy2>=3.5.13  # R interface for Python - enables RSiena integration
+rpy2-robjects>=3.6.2  # R objects interface
+rpy2-rinterface>=3.6.3  # R interface core
+
+# Statistical Analysis and Experimental Design
+scikit-learn>=1.3.0
+statsmodels>=0.14.0
+pingouin>=0.5.3  # Statistical tests and effect sizes
+SALib>=1.4.7  # Sensitivity analysis library
+pyDOE2>=1.3.0  # Design of experiments
+sobol-seq>=0.2.0  # Sobol sequence generation
+lifelines>=0.27.0  # Survival analysis
+arch>=6.2.0  # ARCH models for time series
+
+# Bayesian Analysis (Python support for R workflows)
+pymc>=5.8.0  # Bayesian modeling
+arviz>=0.16.0  # Bayesian analysis visualization
+bambi>=0.12.0  # High-level Bayesian models
+
+# Network Analysis (Complementary to R igraph/sna)
+python-igraph>=0.10.0  # Python igraph binding
+graph-tool>=2.45  # High-performance network analysis (if available)
+netgraph>=4.10.0  # Network visualization
+graspy>=0.3.0  # Graph statistics
+
+# Visualization and Animation
+matplotlib>=3.7.2
+seaborn>=0.12.2
+plotly>=5.15.0
+bokeh>=3.2.1
+altair>=5.0.0  # Grammar of graphics
+mesa-viz-tornado>=0.1.3  # Mesa visualization server
+pillow>=10.0.0  # Image processing
+ffmpeg-python>=0.2.0  # Video generation for animations
+imageio>=2.31.0  # Image I/O for animations
+ipywidgets>=8.0.7  # Interactive widgets
+holoviews>=1.17.0  # High-level visualization
+panel>=1.2.0  # Interactive dashboards
+
+# Geospatial Analysis (Supporting R sf/sp ecosystem)
+geopandas>=0.13.0
+shapely>=2.0.0
+fiona>=1.9.0
+folium>=0.14.0  # Interactive maps
+contextily>=1.3.0  # Web map tiles
+rasterio>=1.3.0  # Raster data
+
+# Performance and Parallel Computing
+multiprocessing-logging>=0.3.4
+joblib>=1.3.1
+tqdm>=4.65.0
+dask>=2023.7.0  # Distributed computing
+distributed>=2023.7.0  # Dask distributed
+numexpr>=2.8.0  # Fast numerical expressions
+memory-profiler>=0.61.0  # Memory usage profiling
+psutil>=5.9.5  # System monitoring
+line-profiler>=4.1.0  # Line-by-line profiling
+
+# Data Management and I/O
+h5py>=3.9.0
+tables>=3.8.0  # HDF5 for Python
+pyarrow>=12.0.1
+fastparquet>=0.8.0  # Fast Parquet I/O
+openpyxl>=3.1.0  # Excel support
+xlrd>=2.0.0  # Excel reading
+sqlalchemy>=2.0.0  # Database toolkit
+pymongo>=4.5.0  # MongoDB support
+
+# Time Series Analysis
+tslearn>=0.6.0  # Time series machine learning
+stumpy>=1.12.0  # Time series pattern mining
+sktime>=0.22.0  # Time series analysis toolkit
+tsfresh>=0.20.0  # Time series feature extraction
+
+# Text Analysis (For qualitative ABM data)
+nltk>=3.8.0
+spacy>=3.6.0
+textblob>=0.17.0
+gensim>=4.3.0  # Topic modeling
+wordcloud>=1.9.0
+
+# Machine Learning Extensions
+xgboost>=1.7.0
+lightgbm>=4.1.0
+catboost>=1.2.0
+imbalanced-learn>=0.11.0
+optuna>=3.3.0  # Hyperparameter optimization
+hyperopt>=0.2.7
+
+# Web Scraping and APIs (For data collection)
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+scrapy>=2.10.0
+selenium>=4.11.0
+tweepy>=4.14.0  # Twitter API
+
+# Jupyter and Interactive Development
+jupyter>=1.0.0
+jupyterlab>=4.0.0
+ipykernel>=6.24.0
+nbconvert>=7.0.0
+voila>=0.5.0  # Jupyter dashboards
+nbformat>=5.9.0
+
+# Configuration and Workflow Management
+pyyaml>=6.0.1
+toml>=0.10.2
+click>=8.1.6
+typer>=0.9.0  # Modern CLI interface
+pydantic>=2.0.0  # Data validation and settings
+hydra-core>=1.3.0  # Configuration management
+omegaconf>=2.3.0  # Hierarchical configuration
+python-dotenv>=1.0.0  # Environment variables
+
+# Development and Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-benchmark>=4.0.0
+pytest-mock>=3.11.0
+pytest-xdist>=3.3.0  # Parallel testing
+hypothesis>=6.82.0  # Property-based testing
+factory-boy>=3.3.0  # Test data generation
+
+# Code Quality and Formatting
+black>=23.7.0
+isort>=5.12.0
+flake8>=6.0.0
+mypy>=1.4.1
+pylint>=2.17.0
+pre-commit>=3.3.0
+bandit>=1.7.0  # Security linting
+
+# Documentation
+sphinx>=7.1.1
+sphinx-rtd-theme>=1.3.0
+nbsphinx>=0.9.2
+myst-parser>=2.0.0  # Markdown support in Sphinx
+sphinx-autodoc-typehints>=1.24.0
+
+# Logging and Monitoring
+loguru>=0.7.0
+structlog>=23.1.0
+rich>=13.5.0  # Rich text and beautiful formatting
+tqdm>=4.65.0
+
+# Cloud and Deployment (Optional)
+boto3>=1.28.0  # AWS SDK
+google-cloud-storage>=2.10.0
+azure-storage-blob>=12.17.0
+
+# Specialized ABM and Simulation
+gym>=0.29.0  # Reinforcement learning environments
+pybullet>=3.2.5  # Physics simulation
+opensimplex>=0.3  # Noise generation
+noise>=1.2.2  # Perlin noise
+
+# Financial/Economic ABM Support
+quantlib>=1.31  # Quantitative finance
+fredapi>=0.5.0  # Federal Reserve Economic Data
+yfinance>=0.2.0  # Yahoo Finance data
+pandas-datareader>=0.10.0
+
+# Additional Scientific Computing
+sympy>=1.12  # Symbolic mathematics
+astropy>=5.3.0  # Astronomy (for space/physics ABMs)
+biopython>=1.81  # Biology (for biological ABMs)
+
+# Database and Storage
+redis>=4.6.0  # In-memory data structure store
+sqlite3  # Built-in, but ensuring availability
+
+# Communication Between R and Python Processes
+zmq>=0.0.0  # ZeroMQ for inter-process communication
+msgpack>=1.0.0  # Efficient binary serialization

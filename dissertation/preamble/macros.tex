@@ -1,0 +1,122 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom Macros for Agent-Based Models Dissertation
+% Mathematical notation and domain-specific commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Agent-Based Model notation
+\newcommand{\ABM}{\text{ABM}}
+\newcommand{\SAOM}{\text{SAOM}}
+\newcommand{\RSiena}{\text{RSiena}}
+
+% Network notation
+\newcommand{\network}[1]{\mathcal{#1}}
+\newcommand{\adjmatrix}[1]{\mathbf{#1}}
+\newcommand{\agent}[1]{a_{#1}}
+\newcommand{\agents}{\mathcal{A}}
+
+% Time notation
+\newcommand{\timestep}[1]{t_{#1}}
+\newcommand{\timeinterval}[2]{[t_{#1}, t_{#2}]}
+
+% Statistical notation
+\newcommand{\prob}[1]{\mathbb{P}(#1)}
+\newcommand{\expect}[1]{\mathbb{E}[#1]}
+\newcommand{\var}[1]{\text{Var}(#1)}
+\newcommand{\cov}[2]{\text{Cov}(#1, #2)}
+
+% Model parameters
+\newcommand{\parameter}[1]{\theta_{#1}}
+\newcommand{\parameters}{\boldsymbol{\theta}}
+\newcommand{\estimate}[1]{\hat{#1}}
+
+% Social network measures
+\newcommand{\degree}[1]{\text{deg}(#1)}
+\newcommand{\clustering}[1]{\text{CC}(#1)}
+\newcommand{\centrality}[2]{\text{#1}_c(#2)}
+
+% Behavioral variables
+\newcommand{\tolerance}{\text{Tolerance}}
+\newcommand{\cooperation}{\text{Cooperation}}
+\newcommand{\friendship}{\text{Friendship}}
+\newcommand{\prejudice}{\text{Prejudice}}
+
+% Mathematical sets
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\integers}{\mathbb{Z}}
+
+% Vectors and matrices
+\newcommand{\vector}[1]{\mathbf{#1}}
+\newcommand{\matrix}[1]{\mathbf{#1}}
+
+% Derivatives and integrals
+\newcommand{\deriv}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #2}#1}
+
+% Likelihood and probability functions
+\newcommand{\likelihood}[1]{\mathcal{L}(#1)}
+\newcommand{\loglik}[1]{\ell(#1)}
+\newcommand{\posterior}[1]{\pi(#1|\text{data})}
+
+% Confidence intervals and hypothesis testing
+\newcommand{\ci}[2]{[#1, #2]}
+\newcommand{\pvalue}{p\text{-value}}
+\newcommand{\nullhyp}{H_0}
+\newcommand{\althyp}{H_1}
+
+% Model comparison measures
+\newcommand{\aic}{\text{AIC}}
+\newcommand{\bic}{\text{BIC}}
+\newcommand{\rmse}{\text{RMSE}}
+
+% Simulation notation
+\newcommand{\simulation}[1]{\text{Sim}_{#1}}
+\newcommand{\montecarlo}{\text{MC}}
+
+% Special functions
+\newcommand{\indicator}[1]{\mathbf{1}_{#1}}
+\newcommand{\sigmoid}[1]{\sigma(#1)}
+
+% Emphasis commands
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\concept}[1]{\emph{#1}}
+\newcommand{\code}[1]{\texttt{#1}}
+
+% Reference shortcuts
+\newcommand{\chapref}[1]{Chapter~\ref{#1}}
+\newcommand{\secref}[1]{Section~\ref{#1}}
+\newcommand{\figref}[1]{Figure~\ref{#1}}
+\newcommand{\tabref}[1]{Table~\ref{#1}}
+\newcommand{\eqref}[1]{Equation~(\ref{#1})}
+
+% Common abbreviations
+\newcommand{\ie}{\emph{i.e.}}
+\newcommand{\eg}{\emph{e.g.}}
+\newcommand{\etc}{\emph{etc.}}
+\newcommand{\vs}{\emph{vs.}}
+\newcommand{\cf}{\emph{cf.}}
+
+% Units and measurements
+\newcommand{\unit}[1]{\,\text{#1}}
+
+% Margin notes for draft reviews
+\newcommand{\todo}[1]{\marginpar{\color{red}\footnotesize TODO: #1}}
+\newcommand{\note}[1]{\marginpar{\color{blue}\footnotesize Note: #1}}
+
+% Special environments for key concepts
+\newenvironment{keypoint}
+    {\begin{quotation}\noindent\textbf{Key Point:}\space}
+    {\end{quotation}}
+
+\newenvironment{research-question}
+    {\begin{quotation}\noindent\textbf{Research Question:}\space}
+    {\end{quotation}}
+
+\newenvironment{hypothesis}
+    {\begin{quotation}\noindent\textbf{Hypothesis:}\space}
+    {\end{quotation}}
+
+% Algorithm environment customization
+\newcommand{\Input}[1]{\State \textbf{Input:} #1}
+\newcommand{\Output}[1]{\State \textbf{Output:} #1}
+\newcommand{\Initialize}[1]{\State \textbf{Initialize:} #1}
