@@ -37,7 +37,11 @@
       "Bash(taskkill:*)",
       "Bash(del main.pdf)",
       "WebSearch",
-      "Bash(del nul)"
+      "Bash(del nul)",
+      "Bash(git push:*)",
+      "Bash(awk:*)",
+      "Read(//c/Users/Nouri/Documents/GitHub/ABM R/**)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
